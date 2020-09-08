@@ -1,11 +1,22 @@
 <div class="row">
-    <div class="col-xs-3">
+    <div class="col-md-3">
     	<table class="table">
-    	    <tr><th class="text-center"><%= @user.user_name %></th></tr>
-    	    <tr><th class="text-center"><%= attachment_image_tag @user, :image_id, format: 'jpeg', fallback: "noimg.jpg", size: "100x100", class: "img-circle" %></th></tr>
-    	    <tr><th class="text-center"><%= @user.introduction %></th></tr>
+    		<!-- ユーザーネイムが登録されていたらユーザーネイムを表示させたい -->
+    	    <tr><th><%= @user.user_name %></th></tr>
+
+    	    <!-- image画像 -->
+    	    <tr><th><%= attachment_image_tag @user, :image_id, format: 'jpeg', fallback: "noimg.jpg", size: "100x100", class: "img-circle" %></th></tr>
+
+    	    <!-- 自己紹介 -->
+    	    <tr><th><%= @user.introduction %></th></tr>
+
+    	    <!-- ウェブサイト -->
+    	    <tr><th><%= link_to @user.website, @user.website %></th></tr>
         </table>
 
-        <div class="row"><%= link_to 'プロフィール編集', edit_user_path(@user.id), class: "col-xs-11 btn-sm btn-success" %></div>
+        <!-- 編集ページ　リンク -->
+        <%= link_to 'プロフィール編集', edit_user_path(@user.id), class: " button_custom btn btn-success" %>
+
     </div>
+
 </div>
