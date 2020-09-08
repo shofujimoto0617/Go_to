@@ -1,0 +1,62 @@
+<br><br>
+<div class="row">
+
+    <!-- userのimgae画像 -->
+	<div class="col-md-8 col-md-offset-2">
+		<p class="text-center"><%= attachment_image_tag @user, :image_id, format: 'jpeg', fallback: "noimg.jpg", size: "100x100", class: "img-circle center-block" %></p>
+	</div>
+
+	<%= form_for(@user, url: user_path, html: {method: :patch}) do |f| %>
+		<div class="col-md-4 col-md-offset-4">
+
+            <!-- 画像変更フィールド -->
+			<div class="form-group center-block">
+				<%= f.attachment_field :image %>
+			</div>
+
+			<!-- 名前変更フィールド -->
+			<div class="form-group">
+				<%= f.label :名前 %>
+				<%= f.text_field :user_name %>
+			</div>
+
+			<!-- ユーザーネーム変更フィールド -->
+			<div class="form-group">
+				<%= f.label :ユーザーネーム %>
+				<%= f.text_field :account_name %>
+			</div>
+
+			<!-- ウェブサイト変更フィールド -->
+			<div class="form-group">
+				<%= f.label :ウェブサイト %>
+				<%= f.text_field :website %>
+			</div>
+
+			<!-- 自己紹介変更フィールド -->
+			<div class="form-group">
+				<%= f.label :自己紹介 %>
+				<%= f.text_area :introduction %>
+			</div>
+
+			<!-- 送信ボタン -->
+			<div class="actions">
+		        <p class="text-right"><%= f.submit "完了", class: " button_custom btn btn-success" %></p>
+	        </div>
+
+		</div>
+	<% end %>
+
+
+	<!-- エラー文表示 -->
+	<% if @user.errors.any? %>
+	    <div id="error_explanation">
+	    	<h3><%= @user.errors.count %> error<br/>Please try again</h3>
+	    	<ul>
+	    		<% @user.errors.full_messages.each do |message| %>
+	    		    <li><%= message %></li>
+	    		<% end %>
+	    	</ul>
+	    </div>
+	<% end %>
+
+</div>
