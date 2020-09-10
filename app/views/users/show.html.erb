@@ -5,7 +5,7 @@
     	    <tr><th><%= @user.user_name %></th></tr>
 
     	    <!-- image画像 -->
-    	    <tr><th><%= attachment_image_tag @user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "100x100", class: "img-circle" %></th></tr>
+    	    <tr><th><%= attachment_image_tag @user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "150x150", class: "rounded-circle" %></th></tr>
 
     	    <!-- 自己紹介 -->
     	    <tr><th><%= @user.introduction %></th></tr>

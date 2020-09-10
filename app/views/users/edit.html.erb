@@ -3,7 +3,7 @@
 
     <!-- userのimgae画像 -->
 	<div class="col-md-8 col-md-offset-2">
-		<p class="text-center"><%= attachment_image_tag @user, :image_id, format: 'jpeg', fallback: "noimg.jpg", size: "100x100", class: "img-circle center-block" %></p>
+		<p class="text-center"><%= attachment_image_tag @user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "200x200", class: "rounded-circle center-block" %></p>
 	</div>
 
 	<%= form_for(@user, url: user_path, html: {method: :patch}) do |f| %>

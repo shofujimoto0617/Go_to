@@ -14,18 +14,20 @@
     <header class="nav navbar-fixed-top">
       <div class="container">
 
-        <nav>
-          <ul class="nav navbar-nav navbar-right">
+        <nav class ="navbar navbar-expand navbar-dark bg-dark fixed-top">
+          <ul class="navbar-nav ml-auto">
             <% if user_signed_in? %>
-              <li></li>
-              <li><%= link_to ' Log out', destroy_user_session_path, method: :delete %></li>
+              <li><%= link_to ' Home', user_path(current_user), class: "nav-link" %></li>
+              <li><%= link_to ' Write', new_post_path, class: "nav-link" %></li>
+              <li><%= link_to ' Look', posts_path, class: "nav-link" %></li>
+              <li><%= link_to ' Log out', destroy_user_session_path, method: :delet, class: "nav-link" %></li>
 
             <% else %>
-              <li><%= link_to ' Login', new_user_session_path %></li>
+              <li><%= link_to ' Login', new_user_session_path, class: "nav-link" %></li>
 
-              <li><%= link_to ' Sign up', new_user_registration_path %></li>
+              <li><%= link_to ' Sign up', new_user_registration_path, class: "nav-link" %></li>
 
-              <li><%= link_to ' About', homes_about_path %></li>
+              <li><%= link_to ' About', homes_about_path, class: "nav-link" %></li>
             <% end %>
           </ul>
         </nav>

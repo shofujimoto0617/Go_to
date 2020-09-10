@@ -1,14 +1,20 @@
 <div class="row">
+	<div class="col-10">
+		<div><%= attachment_image_tag @user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "100x100", class: "rounded-circle" %></div>
+		<div><%= @user.user_name %></div>
+		<div><%= @user.introduction %></div>
+		<div><%= link_to "プロフィール編集", edit_user_path(current_user), class: "btn btn-success" %></div>
+	</div>
 	<% @posts.each do |post| %>
 	    <!-- 仮でレイアウト -->
-		<div class="col-xs-3">
+		<div class="col-3">
 			<!-- ユーザー画像とユーザー名　表示 -->
 		    <table class="table table-hover table-inverse">
-		    	<tr><th><%= attachment_image_tag post.user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "60x60", class: "img-circle" %></th></tr>
+		    	<tr><th><%= attachment_image_tag post.user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "60x60", class: "rounded-circle" %></th></tr>
 		        <tr><th><%= post.user.user_name %></th></tr>
 		    </table>
 		</div>
-		<div class="col-xs-9">
+		<div class="col-9">
 			<!-- place,body,post_images　表示 -->
 		    <table class="table table-hover table-inverse">
 		    	<tr><th><%= link_to post.place, post_path(post.id) %></th></tr>
