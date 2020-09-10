@@ -1,1 +1,27 @@
-<h2>show</h2>
+<div class="row">
+	<div class="col-xs-3">
+		<table class="table table-hover table-inverse">
+			<tr><th><%= attachment_image_tag @post.user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "60x60", class: "img-circle" %></th></tr>
+		    <tr><th><%= @post.user.user_name %></th></tr>
+		</table>
+
+		<table class="table table-hover table-inverse">
+			<tr><th>Went to the day</th></tr>
+			<tr><td><%= @post.start_date.strftime('%Y/%m/%d') %> ~ <%= @post.finish_date.strftime('%Y/%m/%d') %></td></tr>
+		</table>
+
+		<table class="table table-hover table-inverse">
+			<tr><th>Price</th></tr>
+			<tr><td><%= @post.price.to_s(:delimited) %>円</td></tr>
+		</table>
+	</div>
+
+	<div class="col-xs-9">
+		<strong><%= @post.place %></strong>
+		<p><%= @post.body %></p>
+		<% @post.post_images.each do |postimage| %>
+		    <tr><th><%= attachment_image_tag postimage, :image, format: 'jpeg', fallback: "noimg.jpg", size: "150x150" %></th></tr>
+		<% end %>
+		<%= link_to "投稿編集",edit_post_path(@post.id) %>
+	</div>
+</div>
