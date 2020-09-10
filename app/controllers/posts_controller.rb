@@ -13,9 +13,6 @@ class PostsController < ApplicationController
   	@post = Post.find(params[:id])
   end
 
-  def edit
-  end
-
   def create
   	@post = Post.new(post_params)
   	@post.user_id = current_user.id
@@ -27,6 +24,28 @@ class PostsController < ApplicationController
   	redirect_to posts_path
   end
 
+  def edit
+  	@post = Post.find(params[:id])
+  	if current_user != @post.user
+  	  redirect_to posts_path
+  	end
+  end
+
+  def update
+  	@post = Post.find(params[:id])
+  	# start_dateの値　代入
+  	@post.start_date = params[:start_date]
+  	# finish_dateの値　代入
+  	@post.finish_date = params[:finish_date]
+  	@post.update(post_params)
+  	redirect_to post_path(@post.id)
+  end
+
+  def destroy
+  	@post = Post.find(params[:id])
+  	@post.destroy
+  	redirect_to posts_path
+  end
 
   private
   def post_params

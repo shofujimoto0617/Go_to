@@ -1,6 +1,5 @@
-<div class="row">
 	<div class="col-md-6">
-		<%= form_for(@post, url: post_path, html: {method: :patch}) do |f| %>
+		<%= form_for(post, url: posts_path, html: {method: :post}) do |f| %>
 		    <!-- country選択フォーム -->
 		    <div class="field">
 		    	<%= f.label :country, "国内or海外" %><br>
@@ -39,8 +38,7 @@
 		    </div>
 
 		    <div class="actions">
-		    	<%= f.submit "編集する", class: "btn btn-success" %>
+		    	<%= f.submit "送信" %>
 		    </div>
 		<% end %>
 	</div>
-</div>
