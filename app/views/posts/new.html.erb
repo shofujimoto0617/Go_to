@@ -1,46 +1,4 @@
-<br><br><div class="row">
-	<div class="col-md-6">
-		<%= form_for(@post, url: posts_path, html: {method: :post}) do |f| %>
-		    <!-- country選択フォーム -->
-		    <div class="field">
-		    	<%= f.label :country, "国内or海外" %><br>
-		    	<%= select :post, :country, Post.countries.keys.to_a, include_blank: "選択してください" %>
-		    </div>
-
-		    <!-- placeフォーム -->
-		    <div class="field">
-		    	<%= f.label :place, "Place/行先" %>
-		    	<%= f.text_field :place %>
-		    </div>
-
-		    <!-- bodyフォーム -->
-		    <div class="field">
-		    	<%= f.label :body, "レビュー" %>
-		    	<%= f.text_area :body %>
-		    </div>
-
-		    <!-- dayフォーム -->
-		    <div class="field">
-		    	<label>day/日程</label>
-		    	<%= date_field_tag :start_date, {} %> ~
-		    	<%= date_field_tag :finish_date, {} %>
-		    </div>
-
-		    <!-- priceフォーム -->
-		    <div class="field">
-		    	<%= f.label :price, "price/費用" %>
-		    	<%= f.text_field :price %>
-		    </div>
-
-		    <!-- 画像投稿フォーム -->
-		    <div class="field">
-		    	<%= f.label :post_image, "picture/思い出の写真" %>
-		    	<%= f.file_field :post_images_images, multiple: true %>
-		    </div>
-
-		    <div class="actions">
-		    	<%= f.submit "送信" %>
-		    </div>
-		<% end %>
-	</div>
+<br><br>
+<div class="row">
+	<%= render 'shared/newform', post: @post %>
 </div>
