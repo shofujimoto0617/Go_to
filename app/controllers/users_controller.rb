@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def show
-	@user = User.find(params[:id])
+	  @user = User.find(params[:id])
+    @posts = @user.posts
   end
 
   def edit
@@ -9,6 +10,7 @@ class UsersController < ApplicationController
 
   def update
   	@user = User.find(params[:id])
+    # @user.sex = params[:sex].to_i
   	if @user.update(user_params)
   	  redirect_to user_path(@user.id), notice: "変更されました"
   	else
@@ -18,6 +20,6 @@ class UsersController < ApplicationController
 
   private
   def user_params
-  	params.require(:user).permit(:user_name, :account_name, :website, :introduction, :image)
+  	params.require(:user).permit(:user_name, :account_name, :website, :introduction, :image, :phone_number, :sex)
   end
 end
