@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   # bookの関連付け
   has_many :posts, dependent: :destroy
+  # post_commentの関連付け
+  has_many :post_comments, dependent: :destroy
 
   # refielのためのattachment
   attachment :image, destroy: false

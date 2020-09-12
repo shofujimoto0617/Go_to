@@ -43,7 +43,7 @@
 		        	<th>Review/レビュー</th>
 		        </tr>
 		        <tr>
-		        	<th><%= @post.body %></th>
+		        	<td><%= @post.body %></td>
 		        </tr>
 		    </tbody>
 		</table>
@@ -53,8 +53,33 @@
 		    </div>
 		<% end %>
 		<br>
-		<%= link_to "編集",edit_post_path(@post.id) %><br>
+		<%= link_to "編集",edit_post_path(@post.id) %>
 		<%= link_to "削除", post_path(@post.id), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"} %>
 
+	</div>
+
+    <div class="col-10 offset-2">
+	    <div class="comment-form">
+			<%= form_for [@post, @post_comment] do |f| %>
+			    <%= f.text_area :comment, size: "50x2" %>
+			    <%= f.submit '送信', class: 'btn-sm btn-primary' %>
+			<% end %>
+		</div>
+		<table class="table table-borderless">
+			<% @post_comments.each do |post_comment| %>
+			    <tr>
+			    	<th>
+			    		<%= attachment_image_tag post_comment.user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "80x80", class: "rounded-circle" %><br>
+			    		<%= post_comment.user.account_name %>
+			    	</th>
+			    	<td>
+			    		<%= post_comment.comment %>
+			    		<% if current_user == post_comment.user %>
+			    		    <%= link_to "削除", post_post_comment_path(@post, post_comment), method: :delete %>
+			    		<% end %>
+			    	</td>
+			    </tr>
+		    <% end %>
+		</table>
 	</div>
 </div>
