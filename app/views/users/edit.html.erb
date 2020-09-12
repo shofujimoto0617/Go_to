@@ -1,16 +1,20 @@
-<br><br>
 <div class="row">
+	<div class="col-10 offset-1">
+	    <div class="heading">
+		    <h1 class="heading_text">Change registration information</h1>
+		</div>
+	</div>
 
     <!-- userのimgae画像 -->
-	<div class="col-xs-3">
-		<p class="text-center"><%= attachment_image_tag @user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "200x200", class: "rounded-circle center-block" %></p>
+	<div class="col-3 offset-1">
+		<p class="text-center"><%= attachment_image_tag @user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "180x180", class: "rounded-circle center-block" %></p>
 	</div>
 
 	<%= form_for(@user, url: user_path, html: {method: :patch}) do |f| %>
-		<div class="col-xs-9">
+		<div class="col-7 offset-2">
 
             <!-- 画像変更フィールド -->
-			<div class="form-group center-block">
+			<div class="form-group">
 				<%= f.attachment_field :image %>
 			</div>
 

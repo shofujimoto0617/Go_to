@@ -13,7 +13,7 @@
 					<th><%= attachment_image_tag @post.user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "100x100", class: "rounded-circle" %></th>
 				</tr>
 			    <tr>
-		        	<th>Went to the day</th>
+		        	<th>Went to the day/日程</th>
 		        </tr>
 			    <tr>
 			    	<td><%= @post.start_date.strftime('%Y/%m/%d') %> ~ <%= @post.finish_date.strftime('%Y/%m/%d') %></td>
