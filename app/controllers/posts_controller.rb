@@ -20,9 +20,9 @@ class PostsController < ApplicationController
   	@post = Post.new(post_params)
   	@post.user_id = current_user.id
   	# start_dateをdate型に変換
-  	@post.start_date = params[:start_date].to_date
+  	# @post.start_date = params[:start_date].to_date
   	# finish_dateをdate型に変換
-  	@post.finish_date = params[:finish_date].to_date
+  	# @post.finish_date = params[:finish_date].to_date
   	@post.save
   	redirect_to posts_path
   end

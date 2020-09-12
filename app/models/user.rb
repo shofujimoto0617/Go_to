@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   # post_commentの関連付け
   has_many :post_comments, dependent: :destroy
+  # favoriteの関連付け
+  has_many :favorites, dependent: :destroy
 
   # refielのためのattachment
   attachment :image, destroy: false

@@ -10,8 +10,11 @@ class UsersController < ApplicationController
 
   def update
   	@user = User.find(params[:id])
-    # @user.sex = params[:sex].to_i
-  	if @user.update(user_params)
+    # hennkou
+    data = user_params
+    data[:sex] = data[:sex].to_i
+
+  	if @user.update(data)
   	  redirect_to user_path(@user.id), notice: "変更されました"
   	else
   	  render "edit"
