@@ -1,22 +1,101 @@
 <div class="row">
-    <div class="col-md-3">
-    	<table class="table">
-    		<!-- ユーザーネイムが登録されていたらユーザーネイムを表示させたい -->
-    	    <tr><th><%= @user.user_name %></th></tr>
+    <div class="col-10 offset-1">
+    	<div class="heading">
+            <h1 class="heading_text">My page</h1>
 
-    	    <!-- image画像 -->
-    	    <tr><th><%= attachment_image_tag @user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "100x100", class: "img-circle" %></th></tr>
+            <!-- image画像 -->
+            <h3><%= attachment_image_tag @user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "200x200", class: "rounded-circle" %></h3>
 
-    	    <!-- 自己紹介 -->
-    	    <tr><th><%= @user.introduction %></th></tr>
+            <table class="table table-borderless">
+                <tbody>
+                    <!-- ユーザー名 -->
+    	            <tr>
+                        <th>User_name</th>
+                        <td><%= @user.user_name %></td>
+                    </tr>
 
-    	    <!-- ウェブサイト -->
-    	    <tr><th><%= link_to @user.website, @user.website %></th></tr>
-        </table>
+                    <!-- アカウント名 -->
+                    <tr>
+                        <th>Account_name</th>
+                        <td><%= @user.account_name %></td>
+                    </tr>
+
+    	            <!-- 自己紹介 -->
+    	            <tr>
+                        <th>Introduction</th>
+                        <td><%= @user.introduction %></td>
+                    </tr>
+
+    	            <!-- ウェブサイト -->
+    	            <tr>
+                        <th>Website</th>
+                        <td><%= link_to @user.website, @user.website %></td>
+                    </tr>
+
+                    <!-- 電話番号 -->
+                    <tr>
+                        <th>Tel</th>
+                        <td><%= @user.phone_number %></td>
+                    </tr>
+                </tbody>
+
+           </table>
 
         <!-- 編集ページ　リンク -->
-        <%= link_to 'プロフィール編集', edit_user_path(@user.id), class: " button_custom btn btn-success" %>
+            <%= link_to 'プロフィール編集', edit_user_path(@user.id), class: " button_custom btn btn-success" %>
+        </div>
 
     </div>
+
+    <% @posts.each do |post| %>
+        <!-- 仮でレイアウト -->
+        <div class="left_bar col-3 offset-1">
+            <h3><%= post.country %></h3>
+            <!-- start_date,finish_dateの表示 -->
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <th>Went to the day/日程</th>
+                    </tr>
+                    <tr>
+                        <td><%= post.start_date.strftime('%Y/%m/%d') %> ~ <%= post.finish_date.strftime('%Y/%m/%d') %></td>
+                    </tr>
+
+                    <!-- price表示 -->
+                    <tr>
+                        <th>Price/費用</th>
+                    </tr>
+                    <tr>
+                        <td><%= post.price.to_s(:delimited) %>円</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="right_bar col-7 offset-1">
+            <!-- place,body,post_images　表示 -->
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <th>Place/行先</th>
+                    </tr>
+                    <tr>
+                        <td><%= link_to post.place, post_path(post.id) %></td>
+                    </tr>
+                    <tr>
+                        <th>Review/レビュー</th>
+                    </tr>
+                    <tr>
+                        <td><%= post.body %></td>
+                    </tr>
+                </tbody>
+            </table>
+            <% post.post_images.each do |postimage| %>
+                <div class="image_list"><%= attachment_image_tag postimage, :image, format: 'jpeg', fallback: "noimg.jpg", size: "180x180" %></div>
+            <% end %>
+        </div>
+
+    <% end %>
 
 </div>

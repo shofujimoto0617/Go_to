@@ -1,22 +1,57 @@
 <div class="row">
+	<div class="col-10 offset-1">
+		<div class="heading">
+			<h1 class="heading_text">Take a looking</h1>
+		</div>
+	</div>
+
 	<% @posts.each do |post| %>
 	    <!-- 仮でレイアウト -->
-		<div class="col-xs-3">
+		<div class="left_bar col-3 offset-1">
+			<h3><%= post.country %></h3>
 			<!-- ユーザー画像とユーザー名　表示 -->
-		    <table class="table table-hover table-inverse">
-		    	<tr><th><%= attachment_image_tag post.user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "60x60", class: "img-circle" %></th></tr>
-		        <tr><th><%= post.user.user_name %></th></tr>
+		    <table class="table table-borderless">
+		    	<tbody>
+		    	    <tr>
+		    	    	<th><%= attachment_image_tag post.user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "100x100", class: "rounded-circle" %></th>
+		    	    </tr>
+
+		            <tr>
+		            	<th><%= link_to post.user.user_name, user_path(post.user) %></th>
+		            </tr>
+		            <tr>
+		            	<th><%= post.user.introduction %></th>
+		            </tr>
+		        </tbody>
 		    </table>
+
 		</div>
-		<div class="col-xs-9">
+
+		<div class="right_bar col-7 offset-1">
 			<!-- place,body,post_images　表示 -->
-		    <table class="table table-hover table-inverse">
-		    	<tr><th><%= link_to post.place, post_path(post.id) %></th></tr>
-		        <tr><th><%= post.body %></th></tr>
-		    <% post.post_images.each do |postimage| %>
-		        <tr><th><%= attachment_image_tag postimage, :image, format: 'jpeg', fallback: "noimg.jpg", size: "100x100" %></th></tr>
-		    <% end %>
+		    <table class="table table-borderless">
+		    	<tbody>
+		    	    <tr>
+		    	    	<th>Place/行先</th>
+		    	    </tr>
+		    	    <tr>
+		    	    	<td><%= link_to post.place, post_path(post.id) %></td>
+		    	    </tr>
+		            <tr>
+		            	<th>Review/レビュー</th>
+		            </tr>
+		            <tr>
+		            	<td><%= post.body %></td>
+		            </tr>
+		        </tbody>
 		    </table>
+		    <% post.post_images.each do |postimage| %>
+		        <div class="image_list">
+		        	<%= attachment_image_tag postimage, :image, format: 'jpeg', fallback: "noimg.jpg", size: "180x180" %>
+		        </div>
+		    <% end %>
 		</div>
+
 	<% end %>
+
 </div>

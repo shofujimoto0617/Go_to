@@ -1,34 +1,59 @@
 <div class="row">
-	<div class="col-xs-3">
-
+	<div class="col-10 offset-1">
+		<div class="heading">
+			<h1 class="heading_text">Write by <%= @post.user.user_name %></h1>
+		</div>
+	</div>
+	<div class="left_bar col-3 offset-1">
+		<h3><%= @post.country %></h3>
         <!-- ユーザーの画像、ユーザー名 -->
-		<table class="table table-hover table-inverse">
-			<tr><th><%= attachment_image_tag @post.user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "60x60", class: "img-circle" %></th></tr>
-		    <tr><th><%= @post.user.user_name %></th></tr>
-		</table>
-
-        <!-- start_date,finish_dateの表示 -->
-		<table class="table table-hover table-inverse">
-			<tr><th>Went to the day</th></tr>
-			<tr><td><%= @post.start_date.strftime('%Y/%m/%d') %> ~ <%= @post.finish_date.strftime('%Y/%m/%d') %></td></tr>
-		</table>
-
-        <!-- price表示 -->
-		<table class="table table-hover table-inverse">
-			<tr><th>Price</th></tr>
-			<tr><td><%= @post.price.to_s(:delimited) %>円</td></tr>
+		<table class="table table-borderless">
+			<tbody>
+				<tr>
+					<th><%= attachment_image_tag @post.user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "100x100", class: "rounded-circle" %></th>
+				</tr>
+			    <tr>
+		        	<th>Went to the day/日程</th>
+		        </tr>
+			    <tr>
+			    	<td><%= @post.start_date.strftime('%Y/%m/%d') %> ~ <%= @post.finish_date.strftime('%Y/%m/%d') %></td>
+			    </tr>
+			    <tr>
+			    	<th>Price/費用</th>
+			    </tr>
+			    <tr>
+			    	<td><%= @post.price.to_s(:delimited) %>円</td>
+			    </tr>
+		    </tbody>
 		</table>
 
 	</div>
 
     <!-- place,post_images表示 -->
-	<div class="col-xs-9">
-		<strong><%= @post.place %></strong>
-		<p><%= @post.body %></p>
+	<div class="right_bar col-7 offset-1">
+		<table class="table table-borderless">
+			<tbody>
+		        <tr>
+		        	<th>Place/行先</th>
+		        </tr>
+		        <tr>
+		        	<td><%= @post.place %></td>
+		        </tr>
+		        <tr>
+		        	<th>Review/レビュー</th>
+		        </tr>
+		        <tr>
+		        	<th><%= @post.body %></th>
+		        </tr>
+		    </tbody>
+		</table>
 		<% @post.post_images.each do |postimage| %>
-		    <tr><th><%= attachment_image_tag postimage, :image, format: 'jpeg', fallback: "noimg.jpg", size: "150x150" %></th></tr>
+		    <div class="image_list">
+		    	<%= attachment_image_tag postimage, :image, format: 'jpeg', fallback: "noimg.jpg", size: "180x180" %>
+		    </div>
 		<% end %>
-		<%= link_to "投稿編集",edit_post_path(@post.id) %>
+		<br>
+		<%= link_to "編集",edit_post_path(@post.id) %><br>
 		<%= link_to "削除", post_path(@post.id), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"} %>
 
 	</div>

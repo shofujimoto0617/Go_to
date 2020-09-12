@@ -13,4 +13,9 @@ class User < ApplicationRecord
   validates :user_name, presence: true, length: {maximum: 10, minimum: 2}
   validates :account_name, length: {maximum: 20}
   validates :introduction, length: {maximum: 50}
+
+  # sexカラムの選択内容
+  enum sex:{
+    男性: 0, 女性: 1
+  }
 end
