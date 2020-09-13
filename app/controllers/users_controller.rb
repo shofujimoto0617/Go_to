@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   def update
   	@user = User.find(params[:id])
+
     # hennkou
     data = user_params
     data[:sex] = data[:sex].to_i
@@ -19,6 +20,18 @@ class UsersController < ApplicationController
   	else
   	  render "edit"
   	end
+  end
+
+  def following
+    @user = User.find(params[:id])
+    @users = @user.following_user
+    render 'show_following'
+  end
+
+  def followers
+    @user = User.find(params[:id])
+    @users = @user.follower_user
+    render 'show_follower'
   end
 
   private
