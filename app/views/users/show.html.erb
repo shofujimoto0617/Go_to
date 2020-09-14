@@ -118,9 +118,36 @@
                     </tr>
                 </tbody>
             </table>
+            <!-- postの画像 -->
             <% post.post_images.each do |postimage| %>
                 <div class="image_list"><%= attachment_image_tag postimage, :image, format: 'jpeg', fallback: "noimg.jpg", size: "180x180" %></div>
             <% end %>
+
+            <div class="far-group">
+                <!-- コメント モーダル表示 -->
+                <div id="post_comment-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+                <%= link_to new_post_post_comment_path(post.id), remote: true do %>
+                    <i class="far fa-comment-alt"></i>
+                    <%= post.post_comments.count %>
+                <% end %>
+
+                <!-- いいね非同期 -->
+                <span id="favorite-<%= post.id %>">
+                    <%= render 'shared/favorite', {post: post} %>
+                </span>
+
+                <!-- post 編集リンク -->
+                <%= link_to edit_post_path(post.id) do %>
+                    <i class="fas fa-cog"></i>
+                <% end %>
+
+                <!-- post 削除リンク -->
+                <%= link_to post_path(post.id), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"} do %>
+                    <i class="fas fa-trash-alt"></i>
+                <% end %>
+
+            </div>
+
         </div>
 
     <% end %>
