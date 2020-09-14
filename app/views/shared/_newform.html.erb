@@ -13,6 +13,10 @@
 		    	<%= select :post, :country, Post.countries.keys.to_a, include_blank: "選択してください" %>
 		    </div>
 
+		    <div class="field">
+		    	<%= f.text_field :tag_ids, class: "form-control", id:'tag_ids' %>
+		    </div>
+
 		    <!-- placeフォーム -->
 		    <div class="field">
 		    	<%= f.label :place, "Place/行先" %><br>

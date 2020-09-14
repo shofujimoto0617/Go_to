@@ -51,6 +51,10 @@
 		        </div>
 		    <% end %>
 
+		    <% post.tags.each do |tag| %>
+		        #<%= tag.tag_name %>
+		    <% end %>
+
 		    <div class="far-group">
 		    	<!-- コメント モーダル表示 -->
 			    <div id="post_comment-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>

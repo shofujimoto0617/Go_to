@@ -19,8 +19,13 @@ class PostsController < ApplicationController
   def create
   	@post = Post.new(post_params)
   	@post.user_id = current_user.id
-  	@post.save
-  	redirect_to posts_path
+    tag_list = params[:post][:tag_ids].split(',')
+  	if @post.save
+      @post.save_tags(tag_list)
+  	  redirect_to posts_path
+    else
+      redirect_to posts_path
+    end
   end
 
   def edit
