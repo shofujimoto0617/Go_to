@@ -52,11 +52,14 @@
 		    <% end %>
 
 		    <div class="far-group">
-		    	<%= link_to post_path(post.id) do %>
+		    	<!-- コメント モーダル表示 -->
+			    <div id="post_comment-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+		    	<%= link_to new_post_post_comment_path(post.id), remote: true do %>
 		            <i class="far fa-comment-alt"></i>
 		            <%= post.post_comments.count %>
 		        <% end %>
 
+                <!-- いいね非同期 -->
 		        <span id="favorite-<%= post.id %>">
 		        	<%= render 'shared/favorite', {post: post} %>
 		        </span>
