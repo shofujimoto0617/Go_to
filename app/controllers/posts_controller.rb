@@ -6,8 +6,14 @@ class PostsController < ApplicationController
   end
 
   def index
-  	@posts = Post.all
+    if params[:tag_search]
+      tag = Tag.find(params[:tag_search])
+      @posts = tag.posts
+    else
+  	  @posts = Post.all
+    end
     @user = User.find(current_user.id)
+    @tags = Tag.all
   end
 
   def show
@@ -24,6 +30,7 @@ class PostsController < ApplicationController
       @post.save_tags(tag_list)
   	  redirect_to posts_path
     else
+      # 変更必要
       redirect_to posts_path
     end
   end

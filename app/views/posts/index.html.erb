@@ -3,6 +3,9 @@
 		<div class="heading">
 			<h1 class="heading_text">Take a looking</h1>
 		</div>
+		<%= form_tag(search_path, method: :get) do %>
+		    <label>タグ検索<%= text_field_tag(:search) %><%= submit_tag "検索", class: "search-btn" %></label>
+		<% end %>
 	</div>
 
 	<% @posts.each do |post| %>
@@ -52,7 +55,7 @@
 		    <% end %>
 
 		    <% post.tags.each do |tag| %>
-		        #<%= tag.tag_name %>
+		        <%= link_to "# #{tag.tag_name} (#{tag.posts.count}) ", posts_path(tag_search: tag.id) %>
 		    <% end %>
 
 		    <div class="far-group">

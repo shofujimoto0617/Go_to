@@ -1,0 +1,10 @@
+<div class="row">
+	<div class="col-10 offset-1">
+		<h1 class="heading_text">タグ</h1>
+	</div>
+	<div class="left_bar col-3 offset-1">
+		<% @tags.each do |tag| %>
+		    <%= link_to "##{tag.tag_name} (#{tag.posts.count}) ", posts_path(tag_search: tag.id) %>
+		<% end %>
+	</div>
+</div>
