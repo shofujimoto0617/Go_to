@@ -6,8 +6,19 @@ class PostsController < ApplicationController
   end
 
   def index
-  	@posts = Post.all
-    @user = User.find(current_user.id)
+    search = params[:search]
+    if search.blank?
+      @tags = Tag.all
+    else
+      @tags = Tag.search(search)
+    end
+
+    if params[:tag_search]
+      tag = Tag.find(params[:tag_search])
+      @posts = tag.posts
+    else
+  	  @posts = Post.all
+    end
   end
 
   def show
@@ -19,8 +30,14 @@ class PostsController < ApplicationController
   def create
   	@post = Post.new(post_params)
   	@post.user_id = current_user.id
-  	@post.save
-  	redirect_to posts_path
+    tag_list = params[:post][:tag_ids].split(',')
+  	if @post.save
+      @post.save_tags(tag_list)
+  	  redirect_to posts_path
+    else
+      # 変更必要
+      redirect_to posts_path
+    end
   end
 
   def edit

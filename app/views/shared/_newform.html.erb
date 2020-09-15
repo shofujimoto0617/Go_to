@@ -13,16 +13,21 @@
 		    	<%= select :post, :country, Post.countries.keys.to_a, include_blank: "選択してください" %>
 		    </div>
 
+		    <div class="field">
+		    	<%= f.label :tag, "タグ" %>
+		    	<%= f.text_field :tag_ids, class: "form-control", id:'tag_ids', placeholder: "複数タグをつけるには ' , ' で区切ってください。" %>
+		    </div>
+
 		    <!-- placeフォーム -->
 		    <div class="field">
 		    	<%= f.label :place, "Place/行先" %><br>
-		    	<%= f.text_field :place %>
+		    	<%= f.text_field :place, class: "form-control" %>
 		    </div>
 
 		    <!-- bodyフォーム -->
 		    <div class="field">
 		    	<%= f.label :body, "レビュー" %><br>
-		    	<%= f.text_area :body %>
+		    	<%= f.text_area :body, class: "form-control" %>
 		    </div>
 
 		    <!-- dayフォーム -->

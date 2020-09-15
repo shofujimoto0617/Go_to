@@ -3,6 +3,12 @@
 		<div class="heading">
 			<h1 class="heading_text">Take a looking</h1>
 		</div>
+		<%= form_tag(posts_path, method: :get) do %>
+		    <label>タグ検索<%= text_field_tag(:search) %><%= submit_tag "検索", class: "search-btn" %></label>
+		<% end %>
+		<% @tags.each do |tag| %>
+		    <%= link_to "# #{tag.tag_name} (#{tag.posts.count}) ", posts_path(tag_search: tag.id) %>
+		<% end %>
 	</div>
 
 	<% @posts.each do |post| %>
@@ -49,6 +55,10 @@
 		        <div class="image_list">
 		        	<%= attachment_image_tag postimage, :image, format: 'jpeg', fallback: "noimg.jpg", size: "180x180" %>
 		        </div>
+		    <% end %>
+
+		    <% post.tags.each do |tag| %>
+		        <%= link_to "# #{tag.tag_name} (#{tag.posts.count}) ", posts_path(tag_search: tag.id) %>
 		    <% end %>
 
 		    <div class="far-group">
