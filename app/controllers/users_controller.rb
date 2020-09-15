@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
   def show
 	  @user = User.find(params[:id])
-    @posts = @user.posts
+    if params[:country].blank?
+      @posts = @user.posts
+    else
+      @posts = @user.posts.where(country: params[:country])
+    end
+
   end
 
   def edit

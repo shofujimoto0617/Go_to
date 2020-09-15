@@ -6,14 +6,19 @@ class PostsController < ApplicationController
   end
 
   def index
+    search = params[:search]
+    if search.blank?
+      @tags = Tag.all
+    else
+      @tags = Tag.search(search)
+    end
+
     if params[:tag_search]
       tag = Tag.find(params[:tag_search])
       @posts = tag.posts
     else
   	  @posts = Post.all
     end
-    @user = User.find(current_user.id)
-    @tags = Tag.all
   end
 
   def show
