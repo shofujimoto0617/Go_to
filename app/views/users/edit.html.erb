@@ -42,16 +42,18 @@
 				<%= f.text_area :introduction %>
 			</div>
 
+            <!-- 電話番号変更フィールド -->
 			<div class="form-group">
 				<%= f.label :phone_number, "電話番号(ハイフンなし)" %>
 				<%= f.text_field :phone_number %>
 			</div>
 
+            <!-- 性別変更フィールド -->
 			<div class="fadio-inline">
 				<%= f.label :sex, :男性 %>
-                <%= f.radio_button :sex, 0 %>
+                <%= f.radio_button :sex, 0, checked: @man %>
                 <%= f.label :sex, :女性 %>
-                <%= f.radio_button :sex, 1 %>
+                <%= f.radio_button :sex, 1, checked: @femalu %>
 			</div>
 
 			<!-- 送信ボタン -->

@@ -1,0 +1,169 @@
+<div class="row">
+    <div class="col-10 offset-1">
+    	<div class="heading">
+            <h1 class="heading_text">
+                <% if current_user == @user %>
+                    My page
+                <% else %>
+                    <%= @user.user_name %> page
+                <% end %>
+            </h1>
+
+            <!-- image画像 -->
+            <h3><%= attachment_image_tag @user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "200x200", class: "rounded-circle" %></h3>
+
+            <table class="table table-borderless">
+                <tbody>
+                    <!-- ユーザー名 -->
+    	            <tr>
+                        <th>User_name</th>
+                        <td><%= @user.user_name %></td>
+                    </tr>
+
+                    <!-- アカウント名 -->
+                    <tr>
+                        <th>Account_name</th>
+                        <td><%= @user.account_name %></td>
+                    </tr>
+
+    	            <!-- 自己紹介 -->
+    	            <tr>
+                        <th>Introduction</th>
+                        <td><%= @user.introduction %></td>
+                    </tr>
+
+    	            <!-- ウェブサイト -->
+    	            <tr>
+                        <th>Website</th>
+                        <td><%= link_to @user.website, @user.website %></td>
+                    </tr>
+
+                    <!-- 電話番号 -->
+                    <tr>
+                        <th>Tel</th>
+                        <td><%= @user.phone_number %></td>
+                    </tr>
+
+                    <!-- フォロー数 -->
+                    <tr>
+                        <th>follows</th>
+                        <th><%= @user.follower.count %></th>
+                    </tr>
+
+                    <!-- フォロワー数 -->
+                    <tr>
+                        <th>followers</th>
+                        <th><%= @user.followed.count %></th>
+                    </tr>
+                </tbody>
+
+            </table>
+            <div class="sub">
+                <p>follows <%= link_to @user.follower.count, following_user_path(@user.id) %></p>
+                <p>followers <%= link_to @user.followed.count, followers_user_path(@user.id) %></p>
+
+            <!-- フォロー機能 -->
+            <% unless @user == current_user %>
+                <% if current_user.following?(@user) %>
+                    <%= link_to 'フォロー中', unfollow_path(@user.id), method: :POST, class: 'btn btn-primary' %>
+                <% else %>
+                    <%= link_to 'フォーローする', follow_path(@user.id), method: :POST, class: 'btn btn-success' %>
+                <% end %>
+            <% end %>
+
+            <!-- 編集ページ　リンク -->
+            <% if @user == current_user %>
+                <%= link_to '変更', edit_user_path(@user.id), class: " button_custom btn btn-success" %>
+            <% end %>
+            </div>
+
+            <%= link_to '全て', user_path(@user.id) %>
+            <%= link_to '国内', country_path(@user.id, country: 0) %>
+            <%= link_to '海外', country_path(@user.id, country: 1) %>
+        </div>
+
+    </div>
+
+    <% @posts.each do |post| %>
+        <!-- 仮でレイアウト -->
+        <div class="left_bar col-3 offset-1">
+            <h3><%= post.country %></h3>
+            <!-- start_date,finish_dateの表示 -->
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <th>Went to the day/日程</th>
+                    </tr>
+                    <tr>
+                        <% if post.start_date and post.finish_date %>
+                        <td><%= post.start_date.strftime('%Y/%m/%d') %> ~ <%= post.finish_date.strftime('%Y/%m/%d') %></td>
+                        <% end %>
+                    </tr>
+
+                    <!-- price表示 -->
+                    <tr>
+                        <th>Price/費用</th>
+                    </tr>
+                    <tr>
+                        <% if post.price %>
+                        <td><%= post.price.to_s(:delimited) %>円</td>
+                        <% end %>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="right_bar col-7 offset-1">
+            <!-- place,body,post_images　表示 -->
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <th>Place/行先</th>
+                    </tr>
+                    <tr>
+                        <td><%= link_to post.place, post_path(post.id) %></td>
+                    </tr>
+                    <tr>
+                        <th>Review/レビュー</th>
+                    </tr>
+                    <tr>
+                        <td><%= post.body %></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- postの画像 -->
+            <% post.post_images.each do |postimage| %>
+                <div class="image_list"><%= attachment_image_tag postimage, :image, format: 'jpeg', fallback: "noimg.jpg", size: "180x180" %></div>
+            <% end %>
+
+            <div class="far-group">
+                <!-- コメント モーダル表示 -->
+                <div id="post_comment-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+                <%= link_to new_post_post_comment_path(post.id), remote: true do %>
+                    <i class="far fa-comment-alt"></i>
+                    <%= post.post_comments.count %>
+                <% end %>
+
+                <!-- いいね非同期 -->
+                <span id="favorite-<%= post.id %>">
+                    <%= render 'shared/favorite', {post: post} %>
+                </span>
+
+                <!-- post 編集リンク -->
+                <%= link_to edit_post_path(post.id) do %>
+                    <i class="fas fa-cog"></i>
+                <% end %>
+
+                <!-- post 削除リンク -->
+                <%= link_to post_path(post.id), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"} do %>
+                    <i class="fas fa-trash-alt"></i>
+                <% end %>
+
+            </div>
+
+        </div>
+
+    <% end %>
+
+</div>

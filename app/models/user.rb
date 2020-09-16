@@ -15,7 +15,7 @@ class User < ApplicationRecord
   has_many :following_user, through: :follower, source: :followed # 自分がフォーローしている人
   has_many :follower_user, through: :followed, source: :follower # 自分をフォローしている人
 
-  # refielのためのattachment
+  # refileのattachment
   attachment :image, destroy: false
 
   # バリデーション/エラーにする条件

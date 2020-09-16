@@ -23,7 +23,11 @@
 		    	    </tr>
 
 		            <tr>
-		            	<th><%= link_to post.user.user_name, user_path(post.user) %></th>
+		            	<% if post.user.account_name %>
+		            	    <th><%= link_to post.user.account_name, user_path(post.user) %></th>
+		            	<% else %>
+		            	    <th><%= link_to post.user.user_name, user_path(post.user) %></th>
+		            	<% end %>
 		            </tr>
 		            <tr>
 		            	<th><%= post.user.introduction %></th>
@@ -58,7 +62,7 @@
 		    <% end %>
 
 		    <% post.tags.each do |tag| %>
-		        <%= link_to "# #{tag.tag_name} (#{tag.posts.count}) ", posts_path(tag_search: tag.id) %>
+		        <%= link_to "# #{tag.tag_name}", posts_path(tag_search: tag.id) %>
 		    <% end %>
 
 		    <div class="far-group">

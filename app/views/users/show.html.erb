@@ -1,7 +1,14 @@
 <div class="row">
     <div class="col-10 offset-1">
     	<div class="heading">
-            <h1 class="heading_text">My page</h1>
+            <h1 class="heading_text">
+                <!-- ログインユーザのページかどうか分岐 -->
+                <% if current_user == @user %>
+                    My page
+                <% else %>
+                    <%= @user.user_name %> page
+                <% end %>
+            </h1>
 
             <!-- image画像 -->
             <h3><%= attachment_image_tag @user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "200x200", class: "rounded-circle" %></h3>
@@ -32,28 +39,34 @@
                         <td><%= link_to @user.website, @user.website %></td>
                     </tr>
 
+                <!-- ログインユーザーページのみ表示 -->
+                <% if current_user == @user %>
                     <!-- 電話番号 -->
                     <tr>
                         <th>Tel</th>
                         <td><%= @user.phone_number %></td>
                     </tr>
 
-                    <!-- フォロー数 -->
+                    <!-- 性別 -->
                     <tr>
-                        <th>follows</th>
-                        <th><%= @user.follower.count %></th>
+                        <th>性別</th>
+                        <td><%= @user.sex %></td>
                     </tr>
 
-                    <!-- フォロワー数 -->
+                    <!-- メールアドレス -->
                     <tr>
-                        <th>followers</th>
-                        <th><%= @user.followed.count %></th>
+                        <th>メールアドレス</th>
+                        <td><%= @user.email %></td>
                     </tr>
+
+                <% end %>
                 </tbody>
 
             </table>
             <div class="sub">
+                <!-- フォロー数 -->
                 <p>follows <%= link_to @user.follower.count, following_user_path(@user.id) %></p>
+                <!-- フォロワー数 -->
                 <p>followers <%= link_to @user.followed.count, followers_user_path(@user.id) %></p>
 
             <!-- フォロー機能 -->
@@ -73,85 +86,8 @@
         </div>
 
     </div>
-    <div id="post"></div>
-
-    <% @posts.each do |post| %>
-        <!-- 仮でレイアウト -->
-        <div class="left_bar col-3 offset-1">
-            <h3><%= post.country %></h3>
-            <!-- start_date,finish_dateの表示 -->
-            <table class="table table-borderless">
-                <tbody>
-                    <tr>
-                        <th>Went to the day/日程</th>
-                    </tr>
-                    <tr>
-                        <td><%= post.start_date.strftime('%Y/%m/%d') %> ~ <%= post.finish_date.strftime('%Y/%m/%d') %></td>
-                    </tr>
-
-                    <!-- price表示 -->
-                    <tr>
-                        <th>Price/費用</th>
-                    </tr>
-                    <tr>
-                        <td><%= post.price.to_s(:delimited) %>円</td>
-                    </tr>
-                </tbody>
-            </table>
-
-        </div>
-
-        <div class="right_bar col-7 offset-1">
-            <!-- place,body,post_images　表示 -->
-            <table class="table table-borderless">
-                <tbody>
-                    <tr>
-                        <th>Place/行先</th>
-                    </tr>
-                    <tr>
-                        <td><%= link_to post.place, post_path(post.id) %></td>
-                    </tr>
-                    <tr>
-                        <th>Review/レビュー</th>
-                    </tr>
-                    <tr>
-                        <td><%= post.body %></td>
-                    </tr>
-                </tbody>
-            </table>
-            <!-- postの画像 -->
-            <% post.post_images.each do |postimage| %>
-                <div class="image_list"><%= attachment_image_tag postimage, :image, format: 'jpeg', fallback: "noimg.jpg", size: "180x180" %></div>
-            <% end %>
-
-            <div class="far-group">
-                <!-- コメント モーダル表示 -->
-                <div id="post_comment-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
-                <%= link_to new_post_post_comment_path(post.id), remote: true do %>
-                    <i class="far fa-comment-alt"></i>
-                    <%= post.post_comments.count %>
-                <% end %>
-
-                <!-- いいね非同期 -->
-                <span id="favorite-<%= post.id %>">
-                    <%= render 'shared/favorite', {post: post} %>
-                </span>
-
-                <!-- post 編集リンク -->
-                <%= link_to edit_post_path(post.id) do %>
-                    <i class="fas fa-cog"></i>
-                <% end %>
-
-                <!-- post 削除リンク -->
-                <%= link_to post_path(post.id), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"} do %>
-                    <i class="fas fa-trash-alt"></i>
-                <% end %>
-
-            </div>
-
-        </div>
-
-    <% end %>
-    <%= link_to '国内',user_path(@user.id, country: 0) %>
-
+</div>
+<!-- coutry別　非同期 -->
+<div class="row" id="country-<%= @user.id %>">
+    <%= render 'shared/country', {user: @user} %>
 </div>

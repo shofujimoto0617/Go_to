@@ -11,6 +11,7 @@ class Post < ApplicationRecord
   has_many :tag_maps, dependent: :destroy
   has_many :tags, through: :tag_maps
 
+  # 複数画像投稿 attachment
   accepts_attachments_for :post_images, attachment: :image
 
   # cuntryの選択
@@ -19,7 +20,7 @@ class Post < ApplicationRecord
   	海外: 1
   }
 
-  #いいねを押しているか判断
+  # いいねを押しているか判断
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end

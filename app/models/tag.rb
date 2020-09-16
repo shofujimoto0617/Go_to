@@ -4,6 +4,7 @@ class Tag < ApplicationRecord
   # postの関連付け
   has_many :posts, through: :tag_maps
 
+  # 入力されたタグ名を部分一致で探す
   def self.search(search)
   	if search
   	  @tags = Tag.where("tag_name LIKE?","%#{search}%")
