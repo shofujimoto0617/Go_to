@@ -11,6 +11,8 @@ class UsersController < ApplicationController
 
   def edit
   	@user = User.find(params[:id])
+    @man = @user.sex == "男性" ? true : false
+    @femalu = @user.sex == "女性" ? true : false
   end
 
   def update

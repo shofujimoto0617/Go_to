@@ -1,7 +1,13 @@
 <div class="row">
     <div class="col-10 offset-1">
     	<div class="heading">
-            <h1 class="heading_text">My page</h1>
+            <h1 class="heading_text">
+                <% if current_user == @user %>
+                    My page
+                <% else %>
+                    <%= @user.user_name %> page
+                <% end %>
+            </h1>
 
             <!-- image画像 -->
             <h3><%= attachment_image_tag @user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "200x200", class: "rounded-circle" %></h3>
@@ -86,7 +92,9 @@
                         <th>Went to the day/日程</th>
                     </tr>
                     <tr>
+                        <% if post.start_date and post.finish_date %>
                         <td><%= post.start_date.strftime('%Y/%m/%d') %> ~ <%= post.finish_date.strftime('%Y/%m/%d') %></td>
+                        <% end %>
                     </tr>
 
                     <!-- price表示 -->
@@ -94,7 +102,9 @@
                         <th>Price/費用</th>
                     </tr>
                     <tr>
+                        <% if post.price %>
                         <td><%= post.price.to_s(:delimited) %>円</td>
+                        <% end %>
                     </tr>
                 </tbody>
             </table>

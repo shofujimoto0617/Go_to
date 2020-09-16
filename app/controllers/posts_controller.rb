@@ -59,7 +59,14 @@ class PostsController < ApplicationController
 
   def destroy
   	@post = Post.find(params[:id])
-  	@post.destroy
+    for tag in @post.tags
+    tag_count = TagMap.where(tag_id: tag.id).distinct.count
+
+      if tag_count <= 1
+        tag.destroy
+      end
+    end
+    @post.destroy
   	redirect_to posts_path
   end
 
