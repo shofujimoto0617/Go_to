@@ -2,12 +2,16 @@ class UsersController < ApplicationController
   def show
 	  @user = User.find(params[:id])
     @posts = @user.posts
-
   end
 
   def show_country
     @user = User.find(params[:id])
-    @posts = @user.posts.where(country: params[:country])
+    # linkから受け取る値(all/0/1)で条件分岐
+    if params[:country] == "all"
+      @posts = @user.posts
+    else
+      @posts = @user.posts.where(country: params[:country])
+    end
   end
 
   def edit
@@ -19,8 +23,7 @@ class UsersController < ApplicationController
 
   def update
   	@user = User.find(params[:id])
-
-    # hennkou
+    # date型に変換
     data = user_params
     data[:sex] = data[:sex].to_i
 

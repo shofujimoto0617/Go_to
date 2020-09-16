@@ -18,7 +18,11 @@
 	    		    <table class="table table-borderless">
 	    			    <tbody>
 	    				    <tr>
-	    					    <th><%= user.account_name %></th>
+	    				    	<% if user.account_name %>
+	    					        <th><%= user.account_name %></th>
+	    					    <% else %>
+	    					        <th><%= user.user_name %></th>
+	    					    <% end %>
 	    				    </tr>
 	    				    <tr>
 	    					    <td><%= user.introduction %></td>
