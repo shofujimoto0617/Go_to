@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   		get :following, :followers
   	end
   end
+  get 'users_country/:id' => 'users#show_country', as: 'country'
   resources :posts do
   	resources :post_comments, only: [:new, :create, :destroy]
   	resource :favorites, only: [:create, :destroy]

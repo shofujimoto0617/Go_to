@@ -1,16 +1,18 @@
 class UsersController < ApplicationController
   def show
 	  @user = User.find(params[:id])
-    if params[:country].blank?
-      @posts = @user.posts
-    else
-      @posts = @user.posts.where(country: params[:country])
-    end
+    @posts = @user.posts
 
+  end
+
+  def show_country
+    @user = User.find(params[:id])
+    @posts = @user.posts.where(country: params[:country])
   end
 
   def edit
   	@user = User.find(params[:id])
+    # ラジオボタンにチェックしていればtrue/チェックなければfalse
     @man = @user.sex == "男性" ? true : false
     @femalu = @user.sex == "女性" ? true : false
   end
