@@ -1,0 +1,23 @@
+<div class="row">
+	<div class="col-10 offset-1">
+		<div class="heading">
+			<div class="heading_text">DM</div>
+			<div><%= @another_user.user_name %></div>
+		</div>
+	</div>
+	<div class="col-10 offset-1">
+		<% @room.direct_messages.each do |dm| %>
+			<div>
+		    	<%= dm.message %>
+		    	<%= dm.user.account_name %>
+			</div>
+		<% end %>
+	</div>
+	<div class="col-10 offset-1">
+		<%= form_for(@direct_message, url: direct_messages_path, html: {method: :post}) do |f| %>
+		    <%= f.text_field :message %>
+		    <%= f.hidden_field :room_id, value: @room.id %>
+		    <%= f.submit '送信' %>
+		<% end %>
+	</div>
+</div>
