@@ -14,6 +14,10 @@ class User < ApplicationRecord
   has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy # フォロワー取得
   has_many :following_user, through: :follower, source: :followed # 自分がフォーローしている人
   has_many :follower_user, through: :followed, source: :follower # 自分をフォローしている人
+  # messageの関連付け
+  has_many :direct_message, dependent: :destroy
+  # entryの関連付け
+  has_many :entries, dependent: :destroy
 
   # refileのattachment
   attachment :image, destroy: false

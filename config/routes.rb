@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   	resources :post_comments, only: [:new, :create, :destroy]
   	resource :favorites, only: [:create, :destroy]
   end
-
+  resources :direct_messages, only: [:create]
+  resources :rooms, only: [:create, :show]
   post 'follow/:id' => 'relationships#follow', as: 'follow'
   post 'unfollow/:id' => 'relationships#unfollow', as: 'unfollow'
 end
