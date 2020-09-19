@@ -1,46 +1,64 @@
-<br><br>
 <div class="row">
+	<div class="col-10 offset-1">
+	    <div class="heading">
+		    <h1 class="heading_text">Change registration information</h1>
+		</div>
+	</div>
 
     <!-- userのimgae画像 -->
-	<div class="col-md-8 col-md-offset-2">
-		<p class="text-center"><%= attachment_image_tag @user, :image_id, format: 'jpeg', fallback: "noimg.jpg", size: "100x100", class: "img-circle center-block" %></p>
+	<div class="col-3 offset-1">
+		<p class="text-center"><%= attachment_image_tag @user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "180x180", class: "rounded-circle center-block" %></p>
 	</div>
 
 	<%= form_for(@user, url: user_path, html: {method: :patch}) do |f| %>
-		<div class="col-md-4 col-md-offset-4">
+		<div class="col-7 offset-2">
 
             <!-- 画像変更フィールド -->
-			<div class="form-group center-block">
+			<div class="form-group">
 				<%= f.attachment_field :image %>
 			</div>
 
 			<!-- 名前変更フィールド -->
 			<div class="form-group">
-				<%= f.label :名前 %>
+				<%= f.label :user_name, "名前" %>
 				<%= f.text_field :user_name %>
 			</div>
 
 			<!-- ユーザーネーム変更フィールド -->
 			<div class="form-group">
-				<%= f.label :ユーザーネーム %>
+				<%= f.label :account_name, "ユーザーネーム" %>
 				<%= f.text_field :account_name %>
 			</div>
 
 			<!-- ウェブサイト変更フィールド -->
 			<div class="form-group">
-				<%= f.label :ウェブサイト %>
+				<%= f.label :website, "ウェブサイト" %>
 				<%= f.text_field :website %>
 			</div>
 
 			<!-- 自己紹介変更フィールド -->
 			<div class="form-group">
-				<%= f.label :自己紹介 %>
+				<%= f.label :introduction, "自己紹介" %>
 				<%= f.text_area :introduction %>
+			</div>
+
+            <!-- 電話番号変更フィールド -->
+			<div class="form-group">
+				<%= f.label :phone_number, "電話番号(ハイフンなし)" %>
+				<%= f.text_field :phone_number %>
+			</div>
+
+            <!-- 性別変更フィールド -->
+			<div class="fadio-inline">
+				<%= f.label :sex, :男性 %>
+                <%= f.radio_button :sex, 0, checked: @man %>
+                <%= f.label :sex, :女性 %>
+                <%= f.radio_button :sex, 1, checked: @femalu %>
 			</div>
 
 			<!-- 送信ボタン -->
 			<div class="actions">
-		        <p class="text-right"><%= f.submit "完了", class: " button_custom btn btn-success" %></p>
+		        <%= f.submit "完了", class: "btn btn-success" %>
 	        </div>
 
 		</div>

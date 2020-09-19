@@ -1,22 +1,106 @@
 <div class="row">
-    <div class="col-md-3">
-    	<table class="table">
-    		<!-- ユーザーネイムが登録されていたらユーザーネイムを表示させたい -->
-    	    <tr><th><%= @user.user_name %></th></tr>
+    <div class="col-10 offset-1">
+    	<div class="heading">
+            <h1 class="heading_text">
+                <!-- ログインユーザのページかどうか分岐 -->
+                <% if current_user == @user %>
+                    My page
+                <% else %>
+                    <%= @user.user_name %> page
+                <% end %>
+            </h1>
 
-    	    <!-- image画像 -->
-    	    <tr><th><%= attachment_image_tag @user, :image_id, format: 'jpeg', fallback: "noimg.jpg", size: "100x100", class: "img-circle" %></th></tr>
+            <!-- image画像 -->
+            <h3><%= attachment_image_tag @user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "200x200", class: "rounded-circle" %></h3>
 
-    	    <!-- 自己紹介 -->
-    	    <tr><th><%= @user.introduction %></th></tr>
+            <table class="table table-borderless">
+                <tbody>
+                    <!-- ユーザー名 -->
+    	            <tr>
+                        <th>User_name</th>
+                        <td><%= @user.user_name %></td>
+                    </tr>
 
-    	    <!-- ウェブサイト -->
-    	    <tr><th><%= link_to @user.website, @user.website %></th></tr>
-        </table>
+                    <!-- アカウント名 -->
+                    <tr>
+                        <th>Account_name</th>
+                        <td><%= @user.account_name %></td>
+                    </tr>
 
-        <!-- 編集ページ　リンク -->
-        <%= link_to 'プロフィール編集', edit_user_path(@user.id), class: " button_custom btn btn-success" %>
+    	            <!-- 自己紹介 -->
+    	            <tr>
+                        <th>Introduction</th>
+                        <td><%= @user.introduction %></td>
+                    </tr>
+
+    	            <!-- ウェブサイト -->
+    	            <tr>
+                        <th>Website</th>
+                        <td><%= link_to @user.website, @user.website %></td>
+                    </tr>
+
+                <!-- ログインユーザーページのみ表示 -->
+                <% if current_user == @user %>
+                    <!-- 電話番号 -->
+                    <tr>
+                        <th>Tel</th>
+                        <td><%= @user.phone_number %></td>
+                    </tr>
+
+                    <!-- 性別 -->
+                    <tr>
+                        <th>性別</th>
+                        <td><%= @user.sex %></td>
+                    </tr>
+
+                    <!-- メールアドレス -->
+                    <tr>
+                        <th>メールアドレス</th>
+                        <td><%= @user.email %></td>
+                    </tr>
+
+                <% end %>
+                </tbody>
+
+            </table>
+            <div class="sub">
+                <!-- フォロー数 -->
+                <p>follows <%= link_to @user.follower.count, following_user_path(@user.id) %></p>
+                <!-- フォロワー数 -->
+                <p>followers <%= link_to @user.followed.count, followers_user_path(@user.id) %></p>
+
+            <!-- フォロー機能 -->
+            <% unless @user == current_user %>
+                <% if current_user.following?(@user) %>
+                    <%= link_to 'フォロー中', unfollow_path(@user.id), method: :POST, class: 'btn btn-primary' %>
+                <% else %>
+                    <%= link_to 'フォーローする', follow_path(@user.id), method: :POST, class: 'btn btn-success' %>
+                <% end %>
+            <% end %>
+
+            <!-- 編集ページ　リンク -->
+            <% if @user == current_user %>
+                <%= link_to '変更', edit_user_path(@user.id), class: " button_custom btn btn-success" %>
+            <% end %>
+
+            <% unless @user.id == current_user.id %>
+                <% if @is_room == true %>
+                    <%= link_to "DM", room_path(@room_id) %>
+                <% else %>
+                    <%= form_for(@room, url: rooms_path, html: {method: :post}) do |f| %>
+                        <%= fields_for @entry do |entry| %>
+                            <%= entry.hidden_field :user_id, value: @user.id %>
+                        <% end %>
+                        <%= f.submit "DM" %>
+                    <% end %>
+                <% end %>
+            <% end %>
+            </div>
+        </div>
 
     </div>
-
+</div>
+<!-- coutry別　非同期 -->
+<div class="row" id="country-<%= @user.id %>">
+    <%= render 'shared/country', {user: @user} %>
 </div>

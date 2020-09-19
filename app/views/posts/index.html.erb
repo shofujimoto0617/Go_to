@@ -1,0 +1,86 @@
+<div class="row">
+	<div class="col-10 offset-1">
+		<div class="heading">
+			<h1 class="heading_text">Take a looking</h1>
+		</div>
+		<%= form_tag(posts_path, method: :get) do %>
+		    <label>タグ検索<%= text_field_tag(:search) %><%= submit_tag "検索", class: "search-btn" %></label>
+		<% end %>
+		<% @tags.each do |tag| %>
+		    <%= link_to "# #{tag.tag_name} (#{tag.posts.count}) ", posts_path(tag_search: tag.id) %>
+		<% end %>
+	</div>
+
+	<% @posts.each do |post| %>
+	    <!-- 仮でレイアウト -->
+		<div class="left_bar col-3 offset-1">
+			<h3><%= post.country %></h3>
+			<!-- ユーザー画像とユーザー名　表示 -->
+		    <table class="table table-borderless">
+		    	<tbody>
+		    	    <tr>
+		    	    	<th><%= attachment_image_tag post.user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "100x100", class: "rounded-circle" %></th>
+		    	    </tr>
+
+		            <tr>
+		            	<% if post.user.account_name %>
+		            	    <th><%= link_to post.user.account_name, user_path(post.user) %></th>
+		            	<% else %>
+		            	    <th><%= link_to post.user.user_name, user_path(post.user) %></th>
+		            	<% end %>
+		            </tr>
+		            <tr>
+		            	<th><%= post.user.introduction %></th>
+		            </tr>
+		        </tbody>
+		    </table>
+
+		</div>
+
+		<div class="right_bar col-7 offset-1">
+			<!-- place,body,post_images　表示 -->
+		    <table class="table table-borderless">
+		    	<tbody>
+		    	    <tr>
+		    	    	<th>Place/行先</th>
+		    	    </tr>
+		    	    <tr>
+		    	    	<td><%= link_to post.place, post_path(post.id) %></td>
+		    	    </tr>
+		            <tr>
+		            	<th>Review/レビュー</th>
+		            </tr>
+		            <tr>
+		            	<td><%= post.body %></td>
+		            </tr>
+		        </tbody>
+		    </table>
+		    <% post.post_images.each do |postimage| %>
+		        <div class="image_list">
+		        	<%= attachment_image_tag postimage, :image, format: 'jpeg', fallback: "noimg.jpg", size: "180x180" %>
+		        </div>
+		    <% end %>
+
+		    <% post.tags.each do |tag| %>
+		        <%= link_to "# #{tag.tag_name}", posts_path(tag_search: tag.id) %>
+		    <% end %>
+
+		    <div class="far-group">
+		    	<!-- コメント モーダル表示 -->
+			    <div id="post_comment-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+		    	<%= link_to new_post_post_comment_path(post.id), remote: true do %>
+		            <i class="far fa-comment-alt"></i>
+		            <%= post.post_comments.count %>
+		        <% end %>
+
+                <!-- いいね非同期 -->
+		        <span id="favorite-<%= post.id %>">
+		        	<%= render 'shared/favorite', {post: post} %>
+		        </span>
+		    </div>
+
+		</div>
+
+	<% end %>
+
+</div>

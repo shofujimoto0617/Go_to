@@ -1,0 +1,48 @@
+<div class="row">
+	<div class="col-6 offset-3">
+		<div class="group_field">
+		<%= form_for(@post, url: post_path, html: {method: :patch}) do |f| %>
+		    <!-- country選択フォーム -->
+		    <div class="field">
+		    	<%= f.label :country, "国内or海外" %><br>
+		    	<%= select :post, :country, Post.countries.keys.to_a, include_blank: "選択してください" %>
+		    </div>
+
+		    <!-- placeフォーム -->
+		    <div class="field">
+		    	<%= f.label :place, "Place/行先" %><br>
+		    	<%= f.text_field :place %>
+		    </div>
+
+		    <!-- bodyフォーム -->
+		    <div class="field">
+		    	<%= f.label :body, "レビュー" %><br>
+		    	<%= f.text_area :body %>
+		    </div>
+
+		    <!-- dayフォーム -->
+		    <div class="field">
+		    	<label>day/日程</label><br>
+		    	<%= f.date_field :start_date %> ~
+		    	<%= f.date_field :finish_date %>
+		    </div>
+
+		    <!-- priceフォーム -->
+		    <div class="field">
+		    	<%= f.label :price, "price/費用" %><br>
+		    	<%= f.text_field :price %>
+		    </div>
+
+		    <!-- 画像投稿フォーム -->
+		    <div class="field">
+		    	<%= f.label :post_image, "picture/思い出の写真" %><br>
+		    	<%= f.file_field :post_images_images, multiple: true %>
+		    </div>
+
+		    <div class="actions">
+		    	<%= f.submit "編集する", class: "btn btn-success" %>
+		    </div>
+		<% end %>
+	    </div>
+	</div>
+</div>
