@@ -8,14 +8,16 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
   </head>
 
   <body>
     <!--        ヘッダー        -->
-    <header class="nav navbar-fixed-top">
+    <header class="nav navbar-fixed-to">
       <div class="container">
 
-        <nav class ="navbar navbar-expand navbar-dark bg-dark fixed-top">
+        <nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
+          <span>go to</span>
           <ul class="navbar-nav ml-auto">
             <% if user_signed_in? %>
               <li><%= link_to ' Look', posts_path, class: "nav-link" %></li>
