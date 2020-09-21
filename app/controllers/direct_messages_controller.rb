@@ -3,9 +3,10 @@ class DirectMessagesController < ApplicationController
   	@direct_message = DirectMessage.new(direct_message_params)
   	@direct_message.user_id = current_user.id
   	if @direct_message.save
-  	  redirect_to room_path(@direct_message.room)
+      @room = Room.find(@direct_message.room.id)
+  	  # redirect_to room_path(@direct_message.room)
   	else
-  	  redirect_back(fallback_location: root_path)
+  	  redirect_back(fallback_location: posts_path)
   	end
   end
 

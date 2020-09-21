@@ -3,7 +3,6 @@ class RoomsController < ApplicationController
   	@room = Room.create
   	current_entry = Entry.create(user_id: current_user.id, room_id: @room.id)
   	another_entry = Entry.create(user_id: params[:entry][:user_id], room_id: @room.id)
-  	binding.pry
   	redirect_to room_path(@room.id)
   end
 

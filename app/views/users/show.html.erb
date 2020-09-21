@@ -1,7 +1,7 @@
 <div class="row">
-    <div class="col-10 offset-1">
+    <div class="col-md-12">
     	<div class="heading">
-            <h1 class="heading_text">
+            <h1 class="heading-text">
                 <!-- ログインユーザのページかどうか分岐 -->
                 <% if current_user == @user %>
                     My page
@@ -9,67 +9,32 @@
                     <%= @user.user_name %> page
                 <% end %>
             </h1>
+        </div>
+    </div>
+</div>
 
-            <!-- image画像 -->
-            <h3><%= attachment_image_tag @user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "200x200", class: "rounded-circle" %></h3>
 
-            <table class="table table-borderless">
-                <tbody>
-                    <!-- ユーザー名 -->
-    	            <tr>
-                        <th>User_name</th>
-                        <td><%= @user.user_name %></td>
-                    </tr>
+<div class="row">
+    <div class="col-md-5">
 
-                    <!-- アカウント名 -->
-                    <tr>
-                        <th>Account_name</th>
-                        <td><%= @user.account_name %></td>
-                    </tr>
+        <div class="user-img">
+            <%= attachment_image_tag @user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "200x200", class: "rounded-circle" %>
+        </div>
 
-    	            <!-- 自己紹介 -->
-    	            <tr>
-                        <th>Introduction</th>
-                        <td><%= @user.introduction %></td>
-                    </tr>
+        <table class="table table-borderless follow">
+            <tbody>
+                <tr>
+                    <th>follows</th>
+                    <th><%= link_to @user.follower.count, following_user_path(@user.id) %></th>
+                </tr>
+                <tr>
+                    <th>followers</th>
+                    <th><%= link_to @user.followed.count, followers_user_path(@user.id) %></th>
+                </tr>
+            </tbody>
+        </table>
 
-    	            <!-- ウェブサイト -->
-    	            <tr>
-                        <th>Website</th>
-                        <td><%= link_to @user.website, @user.website %></td>
-                    </tr>
-
-                <!-- ログインユーザーページのみ表示 -->
-                <% if current_user == @user %>
-                    <!-- 電話番号 -->
-                    <tr>
-                        <th>Tel</th>
-                        <td><%= @user.phone_number %></td>
-                    </tr>
-
-                    <!-- 性別 -->
-                    <tr>
-                        <th>性別</th>
-                        <td><%= @user.sex %></td>
-                    </tr>
-
-                    <!-- メールアドレス -->
-                    <tr>
-                        <th>メールアドレス</th>
-                        <td><%= @user.email %></td>
-                    </tr>
-
-                <% end %>
-                </tbody>
-
-            </table>
-            <div class="sub">
-                <!-- フォロー数 -->
-                <p>follows <%= link_to @user.follower.count, following_user_path(@user.id) %></p>
-                <!-- フォロワー数 -->
-                <p>followers <%= link_to @user.followed.count, followers_user_path(@user.id) %></p>
-
-            <!-- フォロー機能 -->
+        <div class="sub-btn">
             <% unless @user == current_user %>
                 <% if current_user.following?(@user) %>
                     <%= link_to 'フォロー中', unfollow_path(@user.id), method: :POST, class: 'btn btn-primary' %>
@@ -78,9 +43,8 @@
                 <% end %>
             <% end %>
 
-            <!-- 編集ページ　リンク -->
             <% if @user == current_user %>
-                <%= link_to '変更', edit_user_path(@user.id), class: " button_custom btn btn-success" %>
+                <%= link_to 'プロフィール変更', edit_user_path(@user.id), class: " button_custom btn btn-success" %>
             <% end %>
 
             <% unless @user.id == current_user.id %>
@@ -95,9 +59,64 @@
                     <% end %>
                 <% end %>
             <% end %>
-            </div>
         </div>
 
+    </div>
+
+    <div class="col-md-7">
+        <table class="table table-borderless info">
+            <tbody>
+
+                <tr>
+                    <th>User name</th>
+                    <td><%= @user.user_name %></td>
+                </tr>
+
+                <tr>
+                    <th>Account name</th>
+                    <td><%= @user.account_name %></td>
+                </tr>
+
+                <tr>
+                    <th>Introduction</th>
+                    <td><%= @user.introduction %></td>
+                </tr>
+
+                <tr>
+                    <th>Website</th>
+                    <td><%= link_to @user.website, @user.website %></td>
+                </tr>
+
+                <% if current_user == @user %>
+
+                    <tr>
+                        <th>Tel</th>
+                        <td><%= @user.phone_number %></td>
+                    </tr>
+
+                    <tr>
+                        <th>性別</th>
+                        <td><%= @user.sex %></td>
+                    </tr>
+
+                    <tr>
+                        <th>メールアドレス</th>
+                        <td><%= @user.email %></td>
+                    </tr>
+
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-12">
+        <ul class="nav nav-tabs">
+            <li class="nav-item"><%= link_to '全て', country_path(@user.id, country: "all"), method: :get, remote: true, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to '国内', country_path(@user.id, country: 0), method: :get, remote: true, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to '海外', country_path(@user.id, country: 1), method: :get, remote: true, class: "nav-link" %></li>
+        </ul>
     </div>
 </div>
 <!-- coutry別　非同期 -->
