@@ -16,27 +16,13 @@
 	</div>
 </div>
 
-<div class="row">
-	<div class="col-md-10 offset-1">
-		<% @room.direct_messages.each do |dm| %>
-
-		    <% if dm.user_id %>
-	    	    <div class="current-dm col-4 offset-7">
-	    		    <%= dm.message %>
-		   	    </div>
-		   	<% else %>
-		   	    <div class="another-dm col-4 offser-1">
-	    		    <%= dm.message %>
-		   	    </div>
-		   	<% end %>
-
-	    <% end %>
-	</div>
+<div class="row" id="message">
+    <%= render 'shared/message', {room: @room} %>
 </div>
 
 <div class="row">
 	<div class="col-md-6 offset-6 dm-form">
-		<%= form_for(@direct_message, url: direct_messages_path, html: {method: :post}) do |f| %>
+		<%= form_for(@direct_message, url: direct_messages_path, html: {method: :post}, remote: true) do |f| %>
 		    <%= f.text_field :message, size: "20x10" %>
 		    <%= f.hidden_field :room_id, value: @room.id %>
 		    <%= f.submit '送信' %>
