@@ -85,7 +85,7 @@ span {
 
 .box-main {
 	text-align: center;
-	border-bottom: 1px solid rgba(0,0,0,.125);
+	display: inline-block;
 }
 
 .box-footer {
@@ -122,6 +122,7 @@ span {
 
 .image_list {
 	display: inline-block;
+	margin : 10px;
 }
 
 .fa-comment-alt {
