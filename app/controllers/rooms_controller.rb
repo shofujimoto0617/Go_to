@@ -18,6 +18,8 @@ class RoomsController < ApplicationController
   	end
   end
 
-
+  def index
+    @entries = Entry.where.not(user_id: current_user.id)
+  end
 
 end
