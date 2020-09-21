@@ -5,7 +5,7 @@ class DirectMessagesController < ApplicationController
   	if @direct_message.save
   	  redirect_to room_path(@direct_message.room)
   	else
-  	  redirect_back(fallback_location: root_path)
+  	  redirect_back(fallback_location: posts_path)
   	end
   end
 
