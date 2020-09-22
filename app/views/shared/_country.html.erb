@@ -3,7 +3,11 @@
         <div class="col-md-4 left-box mt-5">
 
             <div class="country-name">
-                <h2><%= post.country %></h2>
+                <% if post.country == "国内" %>
+                    <img src="/assets/japan.png" alt="ロゴ" width="200" height="100">
+                <% else %>
+                    <img src="/assets/world.png" alt="ロゴ" width="200" height="100">
+                <% end %>
             </div>
 
             <div class="day">

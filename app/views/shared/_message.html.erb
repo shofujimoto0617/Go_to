@@ -3,7 +3,7 @@
 		<% room.direct_messages.each do |dm| %>
 
 		    <% if dm.user_id == current_user.id %>
-	    	    <div class="current-dm col-4 offset-7">
+	    	    <div class="current-dm col-4 offset-8">
 	    		    <%= dm.message %>
 		   	    </div>
 		   	<% else %>

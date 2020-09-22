@@ -14,7 +14,7 @@
 </div>
 
 
-<div class="row">
+<div class="row mt-5">
     <div class="col-md-5">
 
         <div class="user-img">
@@ -40,7 +40,7 @@
             </div>
 
             <% if @user == current_user %>
-                <%= link_to 'プロフィール変更', edit_user_path(@user.id), class: " button_custom btn btn-success" %>
+                <%= link_to 'プロフィール変更', edit_user_path(@user.id), class: " button_custom btn btn-success" %><br>
             <% end %>
 
             <% if @user.id == current_user.id %>
@@ -59,7 +59,9 @@
                         <%= fields_for @entry do |entry| %>
                             <%= entry.hidden_field :user_id, value: @user.id %>
                         <% end %>
-                        <%= f.submit "DM" %>
+                        <%= f.button :type => "submit", style: 'border-style: none;' do %>
+                            <i class="far fa-envelope"></i>
+                        <% end %>
                     <% end %>
                 <% end %>
             <% end %>

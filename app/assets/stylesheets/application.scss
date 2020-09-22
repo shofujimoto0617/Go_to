@@ -29,6 +29,10 @@
   clear: both;
 }
 
+.logo {
+	text-align: center;
+}
+
 body {
 	margin-top: 40px;
 	width: 100%;
@@ -161,6 +165,11 @@ span {
 
 .fa-trash-alt {
 	margin: 20px 0 10px 30px;
+}
+
+.fa-envelope {
+	margin: 20px;
+	font-size: 30px;
 }
 
 .fa-paper-plane {
