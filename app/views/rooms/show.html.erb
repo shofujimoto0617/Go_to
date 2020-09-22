@@ -17,12 +17,14 @@
     <%= render 'shared/message', {room: @room} %>
 </div>
 
-<div class="row">
-	<div class="col-md-6 offset-6 dm-form">
+<div class="row room">
+	<div class="col-md-6 offset-4 dm-form">
 		<%= form_for(@direct_message, url: direct_messages_path, html: {method: :post}, remote: true) do |f| %>
 		    <%= f.text_field :message, size: "20x10" %>
 		    <%= f.hidden_field :room_id, value: @room.id %>
-		    <%= f.submit '送信' %>
+		    <%= f.button :type => "submit", style: 'border-style: none;' do %>
+                <i class="far fa-paper-plane"></i>
+            <% end %>
 		<% end %>
 	</div>
 </div>
