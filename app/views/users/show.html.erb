@@ -35,13 +35,9 @@
         </table>
 
         <div class="sub-btn">
-            <% unless @user == current_user %>
-                <% if current_user.following?(@user) %>
-                    <%= link_to 'フォロー中', unfollow_path(@user.id), method: :POST, class: 'btn btn-primary' %>
-                <% else %>
-                    <%= link_to 'フォーローする', follow_path(@user.id), method: :POST, class: 'btn btn-success' %>
-                <% end %>
-            <% end %>
+            <div id="relationship">
+                <%= render 'shared/relationship', {user: @user} %>
+            </div>
 
             <% if @user == current_user %>
                 <%= link_to 'プロフィール変更', edit_user_path(@user.id), class: " button_custom btn btn-success" %>
