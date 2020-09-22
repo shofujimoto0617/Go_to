@@ -47,9 +47,17 @@
                 <%= link_to 'プロフィール変更', edit_user_path(@user.id), class: " button_custom btn btn-success" %>
             <% end %>
 
+            <% if @user.id == current_user.id %>
+                <%= link_to rooms_path do %>
+                    <i class="far fa-envelope"></i>
+                <% end %>
+            <% end %>
+
             <% unless @user.id == current_user.id %>
                 <% if @is_room == true %>
-                    <%= link_to "DM", room_path(@room_id) %>
+                    <%= link_to room_path(@room_id) do %>
+                        <i class="far fa-envelope"></i>
+                    <% end %>
                 <% else %>
                     <%= form_for(@room, url: rooms_path, html: {method: :post}) do |f| %>
                         <%= fields_for @entry do |entry| %>
