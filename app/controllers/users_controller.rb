@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update]
   def show
 	  @user = User.find(params[:id])
-    @posts = @user.posts
+    @posts = @user.posts.order(created_at: "DESC")
 
     @current_entry = Entry.where(user_id: current_user.id)
     @another_entry = Entry.where(user_id: @user.id)
@@ -27,9 +27,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     # linkから受け取る値(all/0/1)で条件分岐
     if params[:country] == "all"
-      @posts = @user.posts
+      @posts = @user.posts.order(created_at: "DESC")
     else
-      @posts = @user.posts.where(country: params[:country])
+      @posts = @user.posts.where(country: params[:country]).order(created_at: "DESC")
     end
   end
 

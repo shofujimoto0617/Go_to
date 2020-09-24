@@ -16,9 +16,9 @@ class PostsController < ApplicationController
 
     if params[:tag_search]
       tag = Tag.find(params[:tag_search])
-      @posts = tag.posts
+      @posts = tag.posts.order(created_at: "DESC")
     else
-  	  @posts = Post.all
+  	  @posts = Post.all.order(created_at: "DESC")
     end
   end
 
