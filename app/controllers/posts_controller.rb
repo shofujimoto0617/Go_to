@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!
   def new
   	@post = Post.new
   	# postクラスに関連づいたpost_imageクラスのインスタンス
@@ -33,10 +34,9 @@ class PostsController < ApplicationController
     tag_list = params[:post][:tag_ids].split(',')
   	if @post.save
       @post.save_tags(tag_list)
-  	  redirect_to posts_path
+  	  redirect_to posts_path, notice: "Completed !!"
     else
-      # 変更必要
-      redirect_to posts_path
+      render 'new'
     end
   end
 
@@ -53,8 +53,11 @@ class PostsController < ApplicationController
   	@post.start_date = params[:start_date]
   	# finish_dateの値　代入
   	@post.finish_date = params[:finish_date]
-  	@post.update(post_params)
-  	redirect_to post_path(@post.id)
+  	if @post.update(post_params)
+  	  redirect_to post_path(@post.id), notice: "Completed !!"
+    else
+      render 'edit'
+    end
   end
 
   def destroy
@@ -74,4 +77,5 @@ class PostsController < ApplicationController
   def post_params
   	params.require(:post).permit(:country, :place, :body, :start_date, :finish_date, :price, post_images_images: [])
   end
+
 end

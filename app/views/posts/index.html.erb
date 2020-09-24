@@ -35,7 +35,9 @@
 
             <% post.post_images.each do |postimage| %>
             <div class="box-main">
-                <%= attachment_image_tag postimage, :image, format: 'jpeg', fallback: "noimg.jpg", size: "724x300" %>
+                <div class="image_list mt-3">
+                    <%= attachment_image_tag postimage, :image, format: 'jpeg', fallback: "noimg.jpg", size: "180x180" %>
+                </div>
             </div>
             <% end %>
 

@@ -46,7 +46,7 @@
 
             <div class="box-text">
                 <h2><%= link_to @post.place, post_path(@post.id) %></h2>
-                <h3><%= @post.body %></h3>
+                <p><%= @post.body %></p>
             </div>
 
             <% @post.post_images.each do |postimage| %>

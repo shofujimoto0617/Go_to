@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-10 offset-1">
 		<div class="heading">
-			<h1 class="heading_text">Follow Users</h1>
+			<h1 class="heading-text">Follow Users</h1>
 		</div>
 	</div>
 
@@ -18,10 +18,10 @@
 	    		    <table class="table table-borderless">
 	    			    <tbody>
 	    				    <tr>
-	    				    	<% if user.account_name %>
-	    					        <th><%= user.account_name %></th>
+	    				    	<% if user.account_name.present? %>
+	    					        <th><%= link_to user.account_name, user_path(user.id) %></th>
 	    					    <% else %>
-	    					        <th><%= user.user_name %></th>
+	    					        <th><%= link_to user.user_name, user_path(user.id) %></th>
 	    					    <% end %>
 	    				    </tr>
 	    				    <tr>

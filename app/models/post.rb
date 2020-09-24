@@ -14,6 +14,11 @@ class Post < ApplicationRecord
   # 複数画像投稿 attachment
   accepts_attachments_for :post_images, attachment: :image
 
+  # バリデーション エラー条件
+  validates :country, presence: true
+  validates :place, presence: true, length: {maximum: 20}
+  validates :body, length: {maximum: 200}
+
   # cuntryの選択
   enum country:{
   	国内: 0,

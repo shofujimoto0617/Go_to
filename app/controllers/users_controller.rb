@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :ensure_correct_user, only: [:edit, :update]
   def show
 	  @user = User.find(params[:id])
     @posts = @user.posts
@@ -45,7 +47,7 @@ class UsersController < ApplicationController
     data[:sex] = data[:sex].to_i
 
   	if @user.update(data)
-  	  redirect_to user_path(@user.id), notice: "変更されました"
+  	  redirect_to user_path(@user.id), notice: "Completed !!"
   	else
   	  render "edit"
   	end
@@ -66,5 +68,12 @@ class UsersController < ApplicationController
   private
   def user_params
   	params.require(:user).permit(:user_name, :account_name, :website, :introduction, :image, :phone_number, :sex)
+  end
+
+  def ensure_correct_user
+    @user = User.find(params[:id])
+    unless @user == current_user
+      redirect_to user_path(current_user)
+    end
   end
 end
