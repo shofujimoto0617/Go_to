@@ -50,9 +50,9 @@ class PostsController < ApplicationController
   def update
   	@post = Post.find(params[:id])
   	# start_dateの値　代入
-  	@post.start_date = params[:start_date]
+  	# @post.start_date = params[:start_date]
   	# finish_dateの値　代入
-  	@post.finish_date = params[:finish_date]
+  	# @post.finish_date = params[:finish_date]
   	if @post.update(post_params)
   	  redirect_to post_path(@post.id), notice: "Completed !!"
     else

@@ -30,6 +30,7 @@ class Post < ApplicationRecord
     favorites.where(user_id: user.id).exists?
   end
 
+  # 同じtag_nameをまとめる
   def save_tags(savepost_tags)
     current_tags = self.tags.pluck(:tag_name) unless self.tags.nil?
     old_tags = current_tags - savepost_tags
