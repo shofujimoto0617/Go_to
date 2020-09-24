@@ -18,12 +18,21 @@ class Post < ApplicationRecord
   validates :country, presence: true
   validates :place, presence: true, length: {maximum: 20}
   validates :body, length: {maximum: 200}
+  validate :start_end_check
 
   # cuntryの選択
   enum country:{
   	国内: 0,
   	海外: 1
   }
+
+  # valedate false条件
+  def start_end_check
+    return true if start_date.blank? || finish_date.blank?
+    return true if start_date < finish_date
+    errors.add(:finish_date, "の日付を正しく記入してください。")
+    false
+  end
 
   # いいねを押しているか判断
   def favorited_by?(user)

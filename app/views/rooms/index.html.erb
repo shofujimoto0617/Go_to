@@ -12,7 +12,7 @@
 			<thead>
 				<tr>
 					<th></th>
-					<th>アカウント名</th>
+					<th>名前</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -20,7 +20,7 @@
 			<% @entries.each do |entry| %>
 				<tr>
 					<td><%= attachment_image_tag entry.user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "100x100", class: "rounded-circle" %></td>
-					<td><%= entry.user.user_name %></td>
+					<td><%= link_to entry.user.user_name, user_path(entry.user) %></td>
 					<td>
 						<%= link_to room_path(entry.room) do %>
 						    <i class="far fa-envelope"></i>

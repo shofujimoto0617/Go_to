@@ -22,9 +22,9 @@
 
             <div class="box-text">
                 <% if post.country == "国内" %>
-                    <img src="/assets/japan.png" alt="ロゴ" width="200" height="100">
+                    <img src="/assets/japan.png" alt="国内" width="200" height="100">
                 <% else %>
-                    <img src="/assets/world.png" alt="ロゴ" width="200" height="100">
+                    <img src="/assets/world.png" alt="海外" width="200" height="100">
                 <% end %>
                 <h3><%= link_to post.place, post_path(post.id) %></h3>
                 <p><%= post.body %></p>
