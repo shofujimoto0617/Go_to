@@ -67,6 +67,7 @@ gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
 gem 'pry-byebug'
 gem 'font-awesome-sass', '~> 5.4.1'
+gem 'rails-i18n'
 
 gem 'dotenv-rails'
 group :production do
