@@ -19,7 +19,8 @@ class RoomsController < ApplicationController
   end
 
   def index
-    @entries = Entry.where.not(user_id: current_user.id)
+    current_room_ids = Entry.where(user_id: current_user.id).pluck(:room_id)
+    @another_entries = Entry.where(room_id: current_room_ids).where.not(user_id: current_user.id)
   end
 
 end

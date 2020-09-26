@@ -5,6 +5,21 @@ class UsersController < ApplicationController
 	  @user = User.find(params[:id])
     @posts = @user.posts.order(created_at: "DESC")
 
+    # @current_entry = Entry.where(user_id: current_user.id)
+    # room_ids = @current_entry.pluck(:room_id)
+    # @another_entry = Entry.where(user_id: @user.id)
+    # another_entry_room_ids = @another_entry.where(room_id: room_ids).pluck(:room_id)
+
+    # unless @user.id == current_user.id
+    #   if another_entry_room_ids.length > 0
+    #         @is_room = true
+    #         @room_id = room_id[0]
+    #   else
+    #     @room = Room.new
+    #     @entry = Entry.new
+    #   end
+    # end
+
     @current_entry = Entry.where(user_id: current_user.id)
     @another_entry = Entry.where(user_id: @user.id)
     unless @user.id == current_user.id
