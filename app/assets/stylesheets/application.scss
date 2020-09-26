@@ -29,6 +29,12 @@
   clear: both;
 }
 
+body {
+	margin-top: 20px;
+	width: 100%;
+	height: 100%;
+}
+
 .flash {
 	color: green;
 	font-size: 30px;
@@ -44,11 +50,94 @@ div.field_with_errors {
 	text-align: center;
 }
 
-body {
-	margin-top: 40px;
+main {
 	width: 100%;
-	height: 100%;
-	margin: 100 0 auto;
+	margin: 0 auto;
+}
+
+.top-logo {
+	padding-top: 100px;
+	text-align: center;
+}
+
+.top-text {
+	padding-top: 10px;
+	font-size: 64px;
+}
+
+.pf {
+	text-align: right;
+	padding-top: 10px;
+}
+
+.guest-sign {
+	text-align: center;
+	padding: 10px 0;
+}
+
+.text-muted {
+	font-size: 7px;
+}
+
+.main-infor {
+	padding-top: 120px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.infor-header {
+	text-align: center;
+	padding: 40px 0;
+	font-size: 38px;
+}
+
+.infor-header::after {
+	content: "";
+	display: block;
+	width: 250px;
+	height: 3px;
+	margin: 8px auto 0 auto;
+	background-color: #ec715f;
+}
+
+.infor-text {
+	width: 460px;
+	text-align: center;
+	padding-top: 50px;
+	float: left;
+}
+
+.infor-header-text {
+	text-align: center;
+	color: #808080;
+	font-size: 18px;
+}
+
+.infor-text h3::after {
+	content: "";
+	display: block;
+	width: 100px;
+	height: 3px;
+	margin: 8px auto 0 auto;
+	background-color: #ec715f;
+}
+
+.infor-text p {
+	padding-top: 20px;
+	color: #808080;
+	font-size: 14px;
+}
+
+.sidbar {
+	width: 500px;
+	padding-top: 30px;
+	float: left;
+	text-align: center;
+}
+
+.sidbar-image {
+	width: 300px;
+	height: 170px;
 }
 
 span {
@@ -124,20 +213,20 @@ span {
 	padding-bottom: 10px;
 }
 
-.left_bar {
-	text-align: center;
-	margin: 10px auto;
-	padding: 10px 0;
-	border-bottom: 4px solid #f7f7f7;
-}
+// .left_bar {
+// 	text-align: center;
+// 	margin: 10px auto;
+// 	padding: 10px 0;
+// 	border-bottom: 4px solid #f7f7f7;
+// }
 
-.right_bar {
-	text-align: center;
-	margin: 10px auto;
-	padding: 10px 0;
-	background-color: #EEEEEE;
-	border-radius: 150px;
-}
+// .right_bar {
+// 	text-align: center;
+// 	margin: 10px auto;
+// 	padding: 10px 0;
+// 	background-color: #EEEEEE;
+// 	border-radius: 150px;
+// }
 
 .image_list {
 	display: inline-block;
