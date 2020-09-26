@@ -50,6 +50,11 @@ div.field_with_errors {
 	text-align: center;
 }
 
+.header-log {
+	width: 60px;
+	height: 60px;
+}
+
 main {
 	width: 100%;
 	margin: 0 auto;
@@ -212,21 +217,6 @@ span {
 	text-align: center;
 	padding-bottom: 10px;
 }
-
-// .left_bar {
-// 	text-align: center;
-// 	margin: 10px auto;
-// 	padding: 10px 0;
-// 	border-bottom: 4px solid #f7f7f7;
-// }
-
-// .right_bar {
-// 	text-align: center;
-// 	margin: 10px auto;
-// 	padding: 10px 0;
-// 	background-color: #EEEEEE;
-// 	border-radius: 150px;
-// }
 
 .image_list {
 	display: inline-block;
