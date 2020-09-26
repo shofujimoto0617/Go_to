@@ -1,86 +1,90 @@
 <div class="row">
-	<div class="col-10 offset-1">
+	<div class="col-12">
 		<div class="heading">
-			<h1 class="heading_text">Write by <%= @post.user.user_name %></h1>
+			<h1 class="heading-text">Write by <%= @post.user.user_name %></h1>
 		</div>
 	</div>
-	<div class="left_bar col-3 offset-1">
-		<h3><%= @post.country %></h3>
-        <!-- ユーザーの画像、ユーザー名 -->
-		<table class="table table-borderless">
-			<tbody>
-				<tr>
-					<th><%= attachment_image_tag @post.user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "100x100", class: "rounded-circle" %></th>
-				</tr>
-			    <tr>
-		        	<th>Went to the day/日程</th>
-		        </tr>
-			    <tr>
-			    	<% if @post.start_date and @post.finish_date %>
-			    	<td><%= @post.start_date.strftime('%Y/%m/%d') %> ~ <%= @post.finish_date.strftime('%Y/%m/%d') %></td>
-			    	<% end %>
-			    </tr>
-			    <tr>
-			    	<th>Price/費用</th>
-			    </tr>
-			    <tr>
-			    	<% if @post.price %>
-			    	<td><%= @post.price.to_s(:delimited) %>円</td>
-			    	<% end %>
-			    </tr>
-		    </tbody>
-		</table>
+</div>
 
-	</div>
+<div class="box">
+	<div class="row">
 
-    <!-- place,post_images表示 -->
-	<div class="right_bar col-7 offset-1">
-		<table class="table table-borderless">
-			<tbody>
-		        <tr>
-		        	<th>Place/行先</th>
-		        </tr>
-		        <tr>
-		        	<td><%= @post.place %></td>
-		        </tr>
-		        <tr>
-		        	<th>Review/レビュー</th>
-		        </tr>
-		        <tr>
-		        	<td><%= @post.body %></td>
-		        </tr>
-		    </tbody>
-		</table>
-		<!-- postの画像 -->
-		<% @post.post_images.each do |postimage| %>
-		    <div class="image_list">
-		    	<%= attachment_image_tag postimage, :image, format: 'jpeg', fallback: "noimg.jpg", size: "180x180" %>
-		    </div>
-		<% end %>
-		<div class="far-group">
-            <!-- コメント モーダル表示 -->
-		    <div id="post_comment-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
-		    	<%= link_to new_post_post_comment_path(@post.id), remote: true do %>
-		            <i class="far fa-comment-alt"></i>
-		            <!-- コメント数 -->
-		            <%= @post.post_comments.count %>
+        <div class="col-md-4 left-box">
+
+            <div class="country-name">
+                <h2><%= @post.country %></h2>
+            </div>
+
+            <div class="post-user">
+                <%= attachment_image_tag @post.user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "100x100", class: "rounded-circle" %><br>
+
+                <% if @post.user.account_name %>
+		            <%= link_to @post.user.account_name, user_path(@post.user) %>
+		        <% else %>
+		            <%= link_to @post.user.user_name, user_path(@post.user) %>
 		        <% end %>
+            </div>
 
-            <!-- いいね非同期 -->
-		    <span id="favorite-<%= @post.id %>">
-		        <%= render 'shared/favorite', {post: @post} %>
-		    </span>
+            <div class="day">
+                <h3>Went to the day/日程</h3>
+                <% if @post.start_date.present? && @post.finish_date.present? %>
+                    <p><%= @post.start_date.strftime('%Y/%m/%d') %> ~ <%= @post.finish_date.strftime('%Y/%m/%d') %></p>
+                <% end %>
+                </p>
+            </div>
 
-		    <%= link_to edit_post_path(@post.id) do %>
-		        <i class="fas fa-cog"></i>
-		    <% end %>
+            <div class="price">
+                <h3>Price/費用</h3>
+                <% if @post.price %>
+                    <p><%= @post.price.to_s(:delimited) %>円</p>
+                <% end %>
+            </div>
 
-		    <%= link_to post_path(@post.id), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"} do %>
-		        <i class="fas fa-trash-alt"></i>
-		    <% end %>
-		</div>
+        </div>
 
-	</div>
+        <div class="col-md-8 right-box">
+
+            <div class="box-text">
+                <h2><%= link_to @post.place, post_path(@post.id) %></h2>
+                <p><%= @post.body %></p>
+            </div>
+
+            <% @post.post_images.each do |postimage| %>
+            <div class="box-main">
+                <div class="image_list">
+                    <%= attachment_image_tag postimage, :image, format: 'jpeg', fallback: "noimg.jpg", size: "180x180" %>
+                </div>
+            </div>
+            <% end %>
+
+            <div class="box-footer">
+
+                <div id="post_comment-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+                <%= link_to new_post_post_comment_path(@post.id), remote: true do %>
+                    <i class="far fa-comment-alt"></i>
+                    <%= @post.post_comments.count %>
+                <% end %>
+
+                <label id="favorite-<%= @post.id %>">
+                    <%= render 'shared/favorite', {post: @post} %>
+                </label>
+
+                <%= link_to edit_post_path(@post.id) do %>
+                    <i class="fas fa-cog"></i>
+                <% end %>
+
+                <%= link_to post_path(@post.id), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"} do %>
+                    <i class="fas fa-trash-alt"></i>
+                <% end %>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
 
     <div class="col-10 offset-2">
 

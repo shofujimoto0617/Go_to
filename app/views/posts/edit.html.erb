@@ -1,5 +1,24 @@
 <div class="row">
-	<div class="col-6 offset-3">
+
+	<% if @post.errors.any? %>
+        <div class="col-10 offset-1 mt-5 field_with_errors">
+            <div id="error_explanation">
+                <h3><%= pluralize(@post.errors.count, "error") %> prohibited this obj from being saved:</h3>
+
+                <% @post.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </div>
+        </div>
+    <% end %>
+
+	<div class="col-10 offset-1">
+		<div class="heading">
+		    <h1 class="heading-text">To edit</h1>
+		</div>
+	</div>
+
+	<div class="col-6 offset-3 mt-5">
 		<div class="group_field">
 		<%= form_for(@post, url: post_path, html: {method: :patch}) do |f| %>
 		    <!-- country選択フォーム -->
@@ -11,13 +30,13 @@
 		    <!-- placeフォーム -->
 		    <div class="field">
 		    	<%= f.label :place, "Place/行先" %><br>
-		    	<%= f.text_field :place %>
+		    	<%= f.text_field :place, class: "form-control"  %>
 		    </div>
 
 		    <!-- bodyフォーム -->
 		    <div class="field">
 		    	<%= f.label :body, "レビュー" %><br>
-		    	<%= f.text_area :body %>
+		    	<%= f.text_area :body, class: "form-control", :size=>"60x10"  %>
 		    </div>
 
 		    <!-- dayフォーム -->
