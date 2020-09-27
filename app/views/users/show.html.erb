@@ -80,7 +80,11 @@
 
                 <tr>
                     <th>Account name</th>
-                    <td><%= @user.account_name %></td>
+                    <td>
+                        <% if @user.account_name.present? %>
+                            <%= "@#{@user.account_name}" %>
+                        <% end %>
+                    </td>
                 </tr>
 
                 <tr>
