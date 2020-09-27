@@ -30,7 +30,7 @@ class Post < ApplicationRecord
   def start_end_check
     return true if start_date.blank? || finish_date.blank?
     return true if start_date < finish_date
-    errors.add(:finish_date, "の日付を正しく記入してください。")
+    errors.add(:finish_date, "の日付を正しく選択してください。")
     false
   end
 

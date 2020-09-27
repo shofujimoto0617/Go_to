@@ -80,7 +80,11 @@
 
                 <tr>
                     <th>Account name</th>
-                    <td><%= @user.account_name %></td>
+                    <td>
+                        <% if @user.account_name.present? %>
+                            <%= "@#{@user.account_name}" %>
+                        <% end %>
+                    </td>
                 </tr>
 
                 <tr>
@@ -101,12 +105,12 @@
                     </tr>
 
                     <tr>
-                        <th>性別</th>
+                        <th>Gender</th>
                         <td><%= @user.sex %></td>
                     </tr>
 
                     <tr>
-                        <th>メールアドレス</th>
+                        <th>Mail address</th>
                         <td><%= @user.email %></td>
                     </tr>
 

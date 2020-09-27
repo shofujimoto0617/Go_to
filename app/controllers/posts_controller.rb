@@ -34,7 +34,7 @@ class PostsController < ApplicationController
     tag_list = params[:post][:tag_ids].split(',')
   	if @post.save
       @post.save_tags(tag_list)
-  	  redirect_to posts_path, notice: "Completed !!"
+  	  redirect_to posts_path, notice: "* A record of your trip has been posted"
     else
       render 'new'
     end
@@ -54,7 +54,7 @@ class PostsController < ApplicationController
   	# finish_dateの値　代入
   	# @post.finish_date = params[:finish_date]
   	if @post.update(post_params)
-  	  redirect_to post_path(@post.id), notice: "Completed !!"
+  	  redirect_to post_path(@post.id), notice: "* Edited the travel record"
     else
       render 'edit'
     end

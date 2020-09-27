@@ -12,16 +12,22 @@
 		<table class="table DM">
 			<thead>
 				<tr>
-					<th>プロフィール画像</th>
-					<th>名前</th>
-					<th></th>
+					<th>profile image</th>
+					<th>name(acount_name)</th>
+					<th>DM</th>
 				</tr>
 			</thead>
 			<tbody>
 			<% @another_entries.each do |another_entry| %>
 				<tr>
 					<td><%= attachment_image_tag another_entry.user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "100x100", class: "rounded-circle" %></td>
-					<td><%= link_to another_entry.user.user_name, user_path(another_entry.user) %></td>
+					<td>
+						<% if another_entry.user.account_name.present? %>
+						    <%= link_to "@#{another_entry.user.account_name}", user_path(another_entry.user) %>
+						<% else %>
+						    <%= link_to another_entry.user.user_name, user_path(another_entry.user) %>
+						<% end %>
+					</td>
 					<td>
 						<%= link_to room_path(another_entry.room) do %>
 						    <i class="far fa-envelope"></i>

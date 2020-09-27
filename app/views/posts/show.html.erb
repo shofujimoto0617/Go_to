@@ -1,7 +1,15 @@
 <div class="row">
 	<div class="col-12">
 		<div class="heading">
-			<h1 class="heading-text">Write by <%= @post.user.user_name %></h1>
+			<h1 class="heading-text">
+                <% if current_user == @post.user %>
+                    My post
+                <% elsif @post.user.account_name.present? %>
+                    Write by <%= "@#{@post.user.account_name}" %>
+                <% else %>
+                    Write by <%= @post.user.user_name %>
+                <% end %>
+            </h1>
 		</div>
 	</div>
 </div>
@@ -11,15 +19,11 @@
 
         <div class="col-md-4 left-box">
 
-            <div class="country-name">
-                <h2><%= @post.country %></h2>
-            </div>
-
             <div class="post-user">
                 <%= attachment_image_tag @post.user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "100x100", class: "rounded-circle" %><br>
 
-                <% if @post.user.account_name %>
-		            <%= link_to @post.user.account_name, user_path(@post.user) %>
+                <% if @post.user.account_name.present? %>
+		            <%= link_to "@#{@post.user.account_name}", user_path(@post.user) %>
 		        <% else %>
 		            <%= link_to @post.user.user_name, user_path(@post.user) %>
 		        <% end %>
@@ -43,6 +47,13 @@
         </div>
 
         <div class="col-md-8 right-box">
+            <div class="country-name">
+                <% if @post.country == "国内" %>
+                    <img src="/assets/japan.png" alt="国内" width="200" height="100">
+                <% else %>
+                    <img src="/assets/world.png" alt="海外" width="200" height="100">
+                <% end %>
+            </div>
 
             <div class="box-text">
                 <h2><%= link_to @post.place, post_path(@post.id) %></h2>
@@ -94,7 +105,11 @@
 			    <tr>
 			    	<th>
 			    		<%= attachment_image_tag post_comment.user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "80x80", class: "rounded-circle" %><br>
-			    		<%= post_comment.user.account_name %>
+                        <% if post_comment.user.account_name.present? %>
+			    		    <%= "@#{post_comment.user.account_name}" %>
+                        <% else %>
+                            <%= post_comment.user.user_name %>
+                        <% end %>
 			    	</th>
 			    	<td>
 			    		<%= post_comment.comment %>

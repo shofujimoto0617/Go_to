@@ -15,7 +15,7 @@
 
 		    <div class="field">
 		    	<%= f.label :tag, "タグ" %>
-		    	<%= f.text_field :tag_ids, class: "form-control", id:'tag_ids', placeholder: "複数タグをつけるには ' , ' で区切ってください。" %>
+		    	<%= f.text_field :tag_ids, class: "form-control", id:'tag_ids', placeholder: "※ 複数タグをつけるには ' , ' で区切ってください。" %>
 		    </div>
 
 		    <!-- placeフォーム -->
@@ -40,7 +40,7 @@
 		    <!-- priceフォーム -->
 		    <div class="field">
 		    	<%= f.label :price, "price/費用" %><br>
-		    	<%= f.text_field :price %>
+		    	<%= f.text_field :price, placeholder: "※ 半角英数字' , 'なし" %> 円
 		    </div>
 
 		    <!-- 画像投稿フォーム -->
