@@ -20,6 +20,13 @@ class PostsController < ApplicationController
     else
   	  @posts = Post.all.order(created_at: "DESC")
     end
+
+    post_search = params[:post_search]
+    if post_search.blank?
+      @posts = Post.all.order(created_at: "DESC")
+    else
+      @posts = Post.post_search(post_search)
+    end
   end
 
   def show
