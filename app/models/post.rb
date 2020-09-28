@@ -26,7 +26,7 @@ class Post < ApplicationRecord
   	海外: 1
   }
 
-  # valedate false条件
+  # validate false条件
   def start_end_check
     return true if start_date.blank? || finish_date.blank?
     return true if start_date < finish_date
@@ -52,6 +52,12 @@ class Post < ApplicationRecord
     new_tags.each do |new_name|
       post_tag = Tag.find_or_create_by(tag_name: new_name)
       self.tags << post_tag
+    end
+  end
+
+  def self.post_search(post_search)
+    if post_search
+      @posts = Post.where("place LIKE?","%#{post_search}%")
     end
   end
 

@@ -7,6 +7,34 @@
 </div>
 
 <div class="row mt-5">
+    <div class="col-md-12">いいねランキング</div>
+    <% @ranks.each.with_index(1) do |rank_post,i| %>
+        <div class="box col-md-4">
+            <div class="box-search"><h5><%= i %>位</h5></div>
+            <div class="box-top">
+                <%= attachment_image_tag rank_post.user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "60x60", class: "rounded-circle" %><br>
+                <% if rank_post.user.account_name.present? %>
+                    <%= link_to "@#{rank_post.user.account_name}",user_path(rank_post.user) %>
+                <% else %>
+                    <%= link_to rank_post.user.user_name, user_path(rank_post.user) %>
+                <% end %>
+            </div>
+            <div class="box-text">
+                <%= link_to rank_post.place, post_path(rank_post) %>
+            </div>
+            <% rank_post.post_images.each do |postimage| %>
+            <div class="box-main">
+                <div class="image_list mt-3">
+                    <%= attachment_image_tag postimage, :image, format: 'jpeg', fallback: "noimg.jpg", size: "80x80" %>
+                </div>
+            </div>
+            <% end %>
+            <div class="box-footer">
+                <i class="fa fa-heart" aria-hidden="true" style="color: gold;"></i>  
+                <%= rank_post.favorites.count %>
+            </div>
+        </div>
+    <% end %>
     <div class="col-md-8">
     <% @posts.each do |post| %>
         <div class="box">
@@ -59,6 +87,15 @@
 
 
     <div class="col-md-4">
+        <div class="box">
+            <h5 class="box-search">Place Search</h5>
+            <div class="search">
+                <%= form_tag(posts_path, method: :get) do %>
+                    <%= text_field_tag(:post_search) %><%= submit_tag "検索", class: "search-btn" %>
+                <% end %>
+            </div>
+        </div>
+
     	<div class="box">
     		<h5 class="box-search">Tag Search</h5>
     	    <div class="search">
