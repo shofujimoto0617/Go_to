@@ -204,6 +204,20 @@ span {
 	text-align: center;
 }
 
+.favorite-rank {
+	text-align: center;
+	font-size: 25px;
+}
+
+.favorite-rank::after {
+	content: "";
+	display: block;
+	width: 150px;
+	height: 3px;
+	margin: 8px auto 0 auto;
+	background-color: #FF0461;
+}
+
 .box {
 	position: relative;
 	flex-direction: column;
@@ -277,6 +291,15 @@ span {
 
 .user-info {
 	margin: 0 auto;
+}
+
+.nav-item {
+	font-size: 20px;
+}
+
+.nav-item:hover {
+	background-color: #B1F9D0;
+    cursor: pointer;
 }
 
 .fa-comment-alt {

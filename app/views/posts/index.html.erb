@@ -7,7 +7,7 @@
 </div>
 
 <div class="row mt-5">
-    <div class="col-md-12">いいねランキング</div>
+    <div class="favorite-rank col-md-12">R A N K I N G</div>
     <% @ranks.each.with_index(1) do |rank_post,i| %>
         <div class="box col-md-4">
             <div class="box-search"><h5><%= i %>位</h5></div>
@@ -25,12 +25,12 @@
             <% rank_post.post_images.each do |postimage| %>
             <div class="box-main">
                 <div class="image_list mt-3">
-                    <%= attachment_image_tag postimage, :image, format: 'jpeg', fallback: "noimg.jpg", size: "80x80" %>
+                    <%= attachment_image_tag postimage, :image, format: 'jpeg', fallback: "noimg.jpg", size: "91x91" %>
                 </div>
             </div>
             <% end %>
             <div class="box-footer">
-                <i class="fa fa-heart" aria-hidden="true" style="color: gold;"></i>  
+                <i class="fas fa-crown" style="color: gold;"></i>  
                 <%= rank_post.favorites.count %>
             </div>
         </div>
@@ -50,9 +50,11 @@
 
             <div class="box-text">
                 <% if post.country == "国内" %>
-                    <img src="/assets/japan.png" alt="国内" width="200" height="100">
+                    <!-- <img src="/assets/japan.png" alt="国内" width="200" height="100"> -->
+                    <%= image_tag asset_path("japan.png", alt: "国内 "), class: "japan-image" %>
                 <% else %>
-                    <img src="/assets/world.png" alt="海外" width="200" height="100">
+                    <!-- <img src="/assets/world.png" alt="海外" width="200" height="100"> -->
+                    <%= image_tag asset_path("world.png", alt: "国内"), class: "world-image" %>
                 <% end %>
                 <h3><%= link_to post.place, post_path(post.id) %></h3>
                 <p><%= post.body %></p>
@@ -65,7 +67,7 @@
             <% post.post_images.each do |postimage| %>
             <div class="box-main">
                 <div class="image_list mt-3">
-                    <%= attachment_image_tag postimage, :image, format: 'jpeg', fallback: "noimg.jpg", size: "180x180" %>
+                    <%= attachment_image_tag postimage, :image, format: 'jpeg', fallback: "noimg.jpg", size: "218x218" %>
                 </div>
             </div>
             <% end %>
