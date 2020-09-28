@@ -4,9 +4,11 @@
 
             <div class="country-name">
                 <% if post.country == "国内" %>
-                    <img src="/assets/japan.png" alt="ロゴ" width="200" height="100">
+                    <!-- <img src="/assets/japan.png" alt="ロゴ" width="200" height="100"> -->
+                    <%= image_tag asset_path("japan.png", alt: "国内"), class: "japan-image" %>
                 <% else %>
-                    <img src="/assets/world.png" alt="ロゴ" width="200" height="100">
+                    <!-- <img src="/assets/world.png" alt="ロゴ" width="200" height="100"> -->
+                    <%= image_tag asset_path("world.png", alt: "国内"), class: "world-image" %>
                 <% end %>
             </div>
 
@@ -32,7 +34,7 @@
             <div class="box-text">
                 <h2><%= link_to post.place, post_path(post.id) %></h2>
                 <p class="mt-3"><%= post.body %></p>
-                <p><%= post.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+                <p class="datatime"><%= post.created_at.strftime('%Y/%m/%d %H:%M') %></p>
             </div>
 
             <% post.post_images.each do |postimage| %>
