@@ -49,16 +49,14 @@
         <div class="col-md-8 right-box">
             <div class="country-name">
                 <% if @post.country == "国内" %>
-                    <!-- <img src="/assets/japan.png" alt="国内" width="200" height="100"> -->
                     <%= image_tag asset_path("japan.png", alt: "国内"), class: "japan-image" %>
                 <% else %>
-                    <!-- <img src="/assets/world.png" alt="海外" width="200" height="100"> -->
                     <%= image_tag asset_path("world.png", alt: "国内"), class: "world-image" %>
                 <% end %>
             </div>
 
             <div class="box-text">
-                <h2><%= link_to @post.place, post_path(@post.id) %></h2>
+                <h2><strong><%= link_to @post.place, post_path(@post.id) %></strong></h2>
                 <p><%= @post.body %></p>
             </div>
 
