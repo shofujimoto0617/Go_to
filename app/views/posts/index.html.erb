@@ -24,7 +24,7 @@
                 <% end %>
             </div>
             <div class="box-text">
-                <%= link_to rank_post.place, post_path(rank_post) %>
+                <strong><%= link_to rank_post.place, post_path(rank_post) %></strong>
             </div>
             <% if rank_post.post_images.count < (2) %>
                 <% rank_post.post_images.each do |postimage| %>
