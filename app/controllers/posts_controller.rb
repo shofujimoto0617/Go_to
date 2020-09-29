@@ -7,27 +7,37 @@ class PostsController < ApplicationController
   end
 
   def index
+    # tag検索
     search = params[:search]
     if search.blank?
       @tags = Tag.all
     else
       @tags = Tag.search(search)
     end
-
+    # tagに紐づくpost
     if params[:tag_search]
-      tag = Tag.find(params[:tag_search])
-      @posts = tag.posts.order(created_at: "DESC")
-    else
-  	  @posts = Post.all.order(created_at: "DESC")
-    end
 
-    post_search = params[:post_search]
-    if post_search.blank?
+      if params[:tag_search]
+        tag = Tag.find(params[:tag_search])
+        @posts = tag.posts.order(created_at: "DESC")
+      else
+    	  @posts = Post.all.order(created_at: "DESC")
+      end
+    # post検索
+    elsif params[:post_search]
+
+      post_search = params[:post_search]
+      if !post_search
+        @posts = Post.all.order(created_at: "DESC")
+      else
+        @posts = Post.post_search(post_search)
+      end
+    # 検索ではない場合
+    else
       @posts = Post.all.order(created_at: "DESC")
-    else
-      @posts = Post.post_search(post_search)
-    end
 
+    end
+    #いいね数の上位３つのpost
     @ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
   end
 
