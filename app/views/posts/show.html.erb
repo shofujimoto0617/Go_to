@@ -23,10 +23,10 @@
                 <%= attachment_image_tag @post.user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "100x100", class: "rounded-circle" %><br>
 
                 <% if @post.user.account_name.present? %>
-		            <%= link_to "@#{@post.user.account_name}", user_path(@post.user) %>
-		        <% else %>
-		            <%= link_to @post.user.user_name, user_path(@post.user) %>
-		        <% end %>
+                    <%= link_to "@#{@post.user.account_name}", user_path(@post.user) %>
+                <% else %>
+                    <%= link_to @post.user.user_name, user_path(@post.user) %>
+                <% end %>
             </div>
 
             <div class="day">
@@ -48,11 +48,7 @@
 
         <div class="col-md-8 right-box">
             <div class="country-name">
-                <% if @post.country == "国内" %>
-                    <%= image_tag asset_path("japan.png", alt: "国内"), class: "japan-image" %>
-                <% else %>
-                    <%= image_tag asset_path("world.png", alt: "国内"), class: "world-image" %>
-                <% end %>
+                <%= render 'shared/image_country', {post: @post} %>
             </div>
 
             <div class="box-text">
@@ -60,48 +56,10 @@
                 <p><%= @post.body %></p>
             </div>
 
-            <% if @post.post_images.count < (2) %>
-                <% @post.post_images.each do |postimage| %>
-                <div class="box-main-one">
-                    <%= attachment_image_tag postimage, :image,
-                         class: "image_one" %>
-                </div>
-                <% end %>
-            <% elsif @post.post_images.count < (3) %>
-                <% @post.post_images.each do |postimage| %>
-                <div class="box-main">
-                    <%= attachment_image_tag postimage, :image,  class: "image_two" %>
-                </div>
-                <% end %>
-            <% else %>
-                <% @post.post_images.each do |postimage| %>
-                <div class="box-main">
-                    <%= attachment_image_tag postimage, :image, class: "image_list" %>
-                </div>
-                <% end %>
-            <% end %>
+            <%= render 'shared/postimages', {post: @post} %>
 
-            <div class="box-footer">
 
-                <div id="post_comment-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
-                <%= link_to new_post_post_comment_path(@post.id), remote: true do %>
-                    <i class="far fa-comment-alt"></i>
-                    <%= @post.post_comments.count %>
-                <% end %>
-
-                <label id="favorite-<%= @post.id %>">
-                    <%= render 'shared/favorite', {post: @post} %>
-                </label>
-
-                <%= link_to edit_post_path(@post.id) do %>
-                    <i class="fas fa-cog"></i>
-                <% end %>
-
-                <%= link_to post_path(@post.id), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"} do %>
-                    <i class="fas fa-trash-alt"></i>
-                <% end %>
-
-            </div>
+            <%= render 'shared/box_footer', {post: @post} %>
 
         </div>
     </div>
