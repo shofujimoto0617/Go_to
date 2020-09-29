@@ -4,7 +4,7 @@
 			<div class="heading-text">
 				<%= attachment_image_tag @another_user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "200x200", class: "rounded-circle" %><br>
 				<% if @another_user.account_name.present? %>
-		            <%= link_to @another_user.account_name, user_path(@another_user.id) %>
+		            <%= link_to "@#{another_user.account_name}", user_path(@another_user.id) %>
 		        <% else %>
 		            <%= link_to @another_user.user_name, user_path(@another_user.id) %>
 		        <% end %>
