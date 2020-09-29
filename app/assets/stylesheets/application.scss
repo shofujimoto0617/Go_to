@@ -595,3 +595,48 @@ span {
   }
 
 }
+
+@media screen and (max-width:375px) {
+  .heading {
+  	padding-top: 0;
+  }
+
+  .heading-text {
+  	font-size: 40px;
+  }
+
+  .image_rank_one {
+	width: 280px;
+	height: 150px;
+	margin: 3px;
+  }
+
+  .images_rank_two {
+	width: 163px;
+	height: 163px;
+	margin: 2px;
+  }
+
+  .images_rank {
+	width: 163px;
+	height: 163px;
+	margin: 1px;
+  }
+  .image_one {
+	width: 270px;
+	height: 180px;
+	margin: 5px;
+  }
+
+  .image_two {
+	width: 163px;
+	height: 163px;
+	margin: 2px;
+  }
+
+  .image_list {
+	width: 163px;
+	height: 163px;
+	margin: 2px;
+  }
+}
