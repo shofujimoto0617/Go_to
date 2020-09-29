@@ -10,7 +10,11 @@
     <div class="favorite-rank col-md-12">R A N K I N G</div>
     <% @ranks.each.with_index(1) do |rank_post,i| %>
         <div class="box col-md-4">
-            <div class="box-search"><h5><%= i %>位</h5></div>
+            <div class="box-search">
+                <h5><%= i %>位</h5>
+                <i class="fas fa-crown" style="color: gold;"></i>  
+                <%= rank_post.favorites.count %>
+            </div>
             <div class="box-top">
                 <%= attachment_image_tag rank_post.user, :image, format: 'jpeg', fallback: "noimg.jpg", size: "60x60", class: "rounded-circle" %><br>
                 <% if rank_post.user.account_name.present? %>
@@ -22,17 +26,27 @@
             <div class="box-text">
                 <%= link_to rank_post.place, post_path(rank_post) %>
             </div>
+            <% if rank_post.post_images.count < (2) %>
+                <% rank_post.post_images.each do |postimage| %>
+                <div class="box-main-one">
+                    <div class="rank_image_one">
+                        <%= attachment_image_tag postimage, :image, class: "image_rank_one" %>
+                    </div>
+                </div>
+                <% end %>
+            <% elsif rank_post.post_images.count < (3) %>
+                <% rank_post.post_images.each do |postimage| %>
+                    <div class="box-main">
+                        <%= attachment_image_tag postimage, :image, class: "images_rank_two" %>
+                    </div>
+                <% end %>
+            <% else %>
             <% rank_post.post_images.each do |postimage| %>
             <div class="box-main">
-                <div class="image_list mt-3">
-                    <%= attachment_image_tag postimage, :image, format: 'jpeg', fallback: "noimg.jpg", size: "91x91" %>
-                </div>
+                <%= attachment_image_tag postimage, :image, class: "images_rank" %>
             </div>
             <% end %>
-            <div class="box-footer">
-                <i class="fas fa-crown" style="color: gold;"></i>  
-                <%= rank_post.favorites.count %>
-            </div>
+        <% end %>
         </div>
     <% end %>
     <div class="col-md-8">
@@ -51,7 +65,7 @@
             <div class="box-text">
                 <% if post.country == "国内" %>
                     <!-- <img src="/assets/japan.png" alt="国内" width="200" height="100"> -->
-                    <%= image_tag asset_path("japan.png", alt: "国内 "), class: "japan-image" %>
+                    <%= image_tag asset_path("japan.png", alt: "国内 "), class: "japan-image"  %>
                 <% else %>
                     <!-- <img src="/assets/world.png" alt="海外" width="200" height="100"> -->
                     <%= image_tag asset_path("world.png", alt: "国内"), class: "world-image" %>
@@ -64,13 +78,25 @@
                 <% end %>
             </div>
 
+        <% if post.post_images.count < (2) %>
             <% post.post_images.each do |postimage| %>
-            <div class="box-main">
-                <div class="image_list mt-3">
-                    <%= attachment_image_tag postimage, :image, format: 'jpeg', fallback: "noimg.jpg", size: "218x218" %>
-                </div>
+            <div class="box-main-one">
+                <%= attachment_image_tag postimage, :image, class: "image_one" %>
             </div>
             <% end %>
+        <% elsif post.post_images.count < (3) %>
+            <% post.post_images.each do |postimage| %>
+            <div class="box-main">
+                <%= attachment_image_tag postimage, :image, class: "image_two" %>
+            </div>
+            <% end %>
+        <% else %>
+            <% post.post_images.each do |postimage| %>
+            <div class="box-main">
+                <%= attachment_image_tag postimage, :image, class: "image_list" %>
+            </div>
+            <% end %>
+        <% end %>
 
             <div class="box-footer">
                 <div id="post_comment-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>

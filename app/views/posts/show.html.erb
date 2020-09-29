@@ -50,10 +50,10 @@
             <div class="country-name">
                 <% if @post.country == "国内" %>
                     <!-- <img src="/assets/japan.png" alt="国内" width="200" height="100"> -->
-                    <%= image_tag asset_path("japan.png", alt: "国内", width: "200", height: "100") %>
+                    <%= image_tag asset_path("japan.png", alt: "国内"), class: "japan-image" %>
                 <% else %>
                     <!-- <img src="/assets/world.png" alt="海外" width="200" height="100"> -->
-                    <%= image_tag asset_path("world.png", alt: "国内", width: "200", height: "100") %>
+                    <%= image_tag asset_path("world.png", alt: "国内"), class: "world-image" %>
                 <% end %>
             </div>
 
@@ -62,12 +62,25 @@
                 <p><%= @post.body %></p>
             </div>
 
-            <% @post.post_images.each do |postimage| %>
-            <div class="box-main">
-                <div class="image_list">
-                    <%= attachment_image_tag postimage, :image, format: 'jpeg', fallback: "noimg.jpg", size: "218x218" %>
+            <% if @post.post_images.count < (2) %>
+                <% @post.post_images.each do |postimage| %>
+                <div class="box-main-one">
+                    <%= attachment_image_tag postimage, :image,
+                         class: "image_one" %>
                 </div>
-            </div>
+                <% end %>
+            <% elsif @post.post_images.count < (3) %>
+                <% @post.post_images.each do |postimage| %>
+                <div class="box-main">
+                    <%= attachment_image_tag postimage, :image,  class: "image_two" %>
+                </div>
+                <% end %>
+            <% else %>
+                <% @post.post_images.each do |postimage| %>
+                <div class="box-main">
+                    <%= attachment_image_tag postimage, :image, class: "image_list" %>
+                </div>
+                <% end %>
             <% end %>
 
             <div class="box-footer">
