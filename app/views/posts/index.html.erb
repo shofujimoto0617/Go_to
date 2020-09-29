@@ -63,11 +63,7 @@
             </div>
 
             <div class="box-text">
-                <% if post.country == "国内" %>
-                    <%= image_tag asset_path("japan.png", alt: "国内 "), class: "japan-image"  %>
-                <% else %>
-                    <%= image_tag asset_path("world.png", alt: "国内"), class: "world-image" %>
-                <% end %>
+                <%= render 'shared/image_country', {post: post} %>
                 <h2><strong><%= link_to post.place, post_path(post.id) %></strong></h2>
                 <p><%= post.body %></p>
                 <p class="datatime"><%= post.created_at.strftime('%Y/%m/%d %H:%M') %></p>
