@@ -7,7 +7,7 @@
 </div>
 
 <div class="row mt-5">
-    <div class="favorite-rank col-md-12">R A N K I N G</div>
+    <strong class="favorite-rank col-md-12">R A N K I N G</strong>
     <% @ranks.each.with_index(1) do |rank_post,i| %>
         <div class="box col-md-4">
             <div class="box-search">
@@ -64,13 +64,11 @@
 
             <div class="box-text">
                 <% if post.country == "国内" %>
-                    <!-- <img src="/assets/japan.png" alt="国内" width="200" height="100"> -->
                     <%= image_tag asset_path("japan.png", alt: "国内 "), class: "japan-image"  %>
                 <% else %>
-                    <!-- <img src="/assets/world.png" alt="海外" width="200" height="100"> -->
                     <%= image_tag asset_path("world.png", alt: "国内"), class: "world-image" %>
                 <% end %>
-                <h3><%= link_to post.place, post_path(post.id) %></h3>
+                <h2><strong><%= link_to post.place, post_path(post.id) %></strong></h2>
                 <p><%= post.body %></p>
                 <p class="datatime"><%= post.created_at.strftime('%Y/%m/%d %H:%M') %></p>
                 <% post.tags.each do |tag| %>
@@ -116,7 +114,9 @@
 
     <div class="col-md-4">
         <div class="box">
-            <h5 class="box-search">Place Search</h5>
+            <h5 class="box-search">
+                <strong>Place Search</strong>
+            </h5>
             <div class="search">
                 <%= form_tag(posts_path, method: :get) do %>
                     <%= text_field_tag(:post_search) %><%= submit_tag "検索", class: "search-btn" %>
@@ -125,7 +125,9 @@
         </div>
 
     	<div class="box">
-    		<h5 class="box-search">Tag Search</h5>
+    		<h5 class="box-search">
+                <strong>Tag Search</strong>
+            </h5>
     	    <div class="search">
     	    	<%= form_tag(posts_path, method: :get) do %>
 		            <%= text_field_tag(:search) %><%= submit_tag "検索", class: "search-btn" %>
