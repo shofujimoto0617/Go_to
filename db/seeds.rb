@@ -7,4 +7,4 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # 簡単ログイン用 データ
-User.create(name: 'ゲストユーザー', email: 'test@example.com', password: 'testtest')
+User.create(user_name: 'ゲストユーザー', email: 'test@example.com', password: 'testtest')
