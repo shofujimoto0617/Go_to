@@ -61,9 +61,9 @@ class UsersController < ApplicationController
     data = user_params
     data[:sex] = data[:sex].to_i
 
-    # if @user.email == "test@example.com"
-    #   redirect_to edit_user_path(@user.id), notice: "* Cannot be edited because it is a guest user"
-  	if @user.update(data)
+    if @user.email == "test@example.com"
+      redirect_to edit_user_path(@user.id), notice: "* Cannot be edited because it is a guest user"
+  	elsif @user.update(data)
   	  redirect_to user_path(@user.id), notice: "* Editing is complete"
   	else
   	  render "edit"
