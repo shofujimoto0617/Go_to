@@ -1,7 +1,7 @@
 <div class="row">
 
 	<% if @post.errors.any? %>
-        <div class="col-10 offset-1 mt-5 field_with_errors">
+        <div class="col-12 mt-5 field_with_errors">
             <div id="error_explanation">
                 <h3><%= pluralize(@post.errors.count, "error") %> prohibited this obj from being saved:</h3>
 
