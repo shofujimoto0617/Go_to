@@ -26,6 +26,9 @@ class Post < ApplicationRecord
   	海外: 1
   }
 
+  # 投稿内容を最新順に表示（降順）
+  scope :recent, -> { order(created_at: :desc) }
+
   # validate false条件
   def start_end_check
     return true if start_date.blank? || finish_date.blank?
