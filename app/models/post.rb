@@ -48,16 +48,19 @@ class Post < ApplicationRecord
     old_tags = current_tags - savepost_tags
     new_tags = savepost_tags - current_tags
 
-    old_tags.each do |old_name|
-      self.tags.delete Tag.find_by(tag_name: old_name)
-    end
+      # 同名のtag_nameが存在する場合 古いtag_nameをdelete
+      old_tags.each do |old_name|
+        self.tags.delete Tag.find_by(tag_name: old_name)
+      end
 
-    new_tags.each do |new_name|
-      post_tag = Tag.find_or_create_by(tag_name: new_name)
-      self.tags << post_tag
-    end
+      # 新しくtag_nameをcreate
+      new_tags.each do |new_name|
+        post_tag = Tag.find_or_create_by(tag_name: new_name)
+        self.tags << post_tag
+      end
   end
 
+  # post検索の入力から部分一致で探す
   def self.post_search(post_search)
     if post_search
       @posts = Post.where("place LIKE?","%#{post_search}%")
