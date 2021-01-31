@@ -50,6 +50,7 @@ class PostsController < ApplicationController
   def create
   	@post = Post.new(post_params)
   	@post.user_id = current_user.id
+    # タグの複数投稿 可能
     tag_list = params[:post][:tag_ids].split(',')
   	if @post.save
       @post.save_tags(tag_list)
@@ -68,10 +69,6 @@ class PostsController < ApplicationController
 
   def update
   	@post = Post.find(params[:id])
-  	# start_dateの値　代入
-  	# @post.start_date = params[:start_date]
-  	# finish_dateの値　代入
-  	# @post.finish_date = params[:finish_date]
   	if @post.update(post_params)
   	  redirect_to post_path(@post.id), notice: "* Edited the travel record"
     else
