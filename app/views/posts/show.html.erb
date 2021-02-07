@@ -53,7 +53,7 @@
 
             <div class="box-text">
                 <h2><strong><%= link_to @post.place, post_path(@post.id) %></strong></h2>
-                <p><%= @post.body %></p>
+                <p><%= safe_join(@post.body.split("\n"),tag(:br)) %></p>
             </div>
 
             <%= render 'shared/postimages', {post: @post} %>

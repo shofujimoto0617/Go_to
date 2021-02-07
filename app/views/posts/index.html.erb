@@ -65,7 +65,7 @@
             <div class="box-text">
                 <%= render 'shared/image_country', {post: post} %>
                 <h2><strong><%= link_to post.place, post_path(post.id) %></strong></h2>
-                <p><%= post.body %></p>
+                <p><%= safe_join(post.body.split("\n"),tag(:br)) %></p>
                 <p class="datatime"><%= post.created_at.strftime('%Y/%m/%d %H:%M') %></p>
                 <% post.tags.each do |tag| %>
                     <%= link_to "# #{tag.tag_name}", posts_path(tag_search: tag.id) %>
