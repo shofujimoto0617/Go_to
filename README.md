@@ -24,8 +24,6 @@ https://docs.google.com/spreadsheets/d/1rlmajeG5WUYAmYSk0dXvH7SfyuPHCS-MxGZNzWFo
 ### ER図
 https://www.draw.io/#G1pDoNqm37kcgZbZSIaknZNMIAEQ8x0VCR
 
-### ワイヤーフレーム
-https://app.diagrams.net/
 
 ## 開発環境
 - OS：Linux(CentOS)
